@@ -18,24 +18,28 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="itf-Lr-x6U">
                                 <rect key="frame" x="0.0" y="44" width="414" height="832"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Sum:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3So-mX-Lpn">
-                                        <rect key="frame" x="107" y="0.0" width="200" height="36"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iBE-7x-Dht">
+                                        <rect key="frame" x="20" y="0.0" width="374" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="NameOfExpense" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-YA-MFh">
+                                                <rect key="frame" x="0.0" y="0.0" width="182" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="AmountOfExpense" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2yT-fe-DY1">
+                                                <rect key="frame" x="192" y="0.0" width="182" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            </textField>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="wbr-MX-VzH"/>
+                                            <constraint firstItem="2yT-fe-DY1" firstAttribute="leading" secondItem="bbw-YA-MFh" secondAttribute="trailing" constant="10" id="N3h-Ra-VfI"/>
+                                            <constraint firstItem="bbw-YA-MFh" firstAttribute="width" secondItem="2yT-fe-DY1" secondAttribute="width" id="WZk-Kv-6Ve"/>
+                                            <constraint firstItem="2yT-fe-DY1" firstAttribute="leading" secondItem="bbw-YA-MFh" secondAttribute="trailing" constant="10" id="cEg-ua-bb2"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ts7-sG-fho">
-                                        <rect key="frame" x="0.0" y="46" width="414" height="728"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="728" id="FNn-Jh-jPA"/>
-                                        </constraints>
-                                    </tableView>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbU-QF-Ujh">
-                                        <rect key="frame" x="107" y="784" width="200" height="48"/>
+                                        <rect key="frame" x="107" y="62" width="200" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Kw6-9T-uVQ"/>
                                         </constraints>
@@ -45,10 +49,36 @@
                                             <action selector="touchNewExpense:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yhx-2o-mi7"/>
                                         </connections>
                                     </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ts7-sG-fho">
+                                        <rect key="frame" x="0.0" y="138" width="414" height="630"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="630" id="dhB-tc-YgM"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusableCell" id="amD-TR-9Tt">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="amD-TR-9Tt" id="9Be-AD-uQo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Sum:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3So-mX-Lpn">
+                                        <rect key="frame" x="107" y="796" width="200" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="wbr-MX-VzH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="3So-mX-Lpn" firstAttribute="top" secondItem="itf-Lr-x6U" secondAttribute="top" id="TAB-DY-Xpx"/>
-                                    <constraint firstAttribute="bottom" secondItem="vbU-QF-Ujh" secondAttribute="bottom" id="VGs-fv-Mqc"/>
+                                    <constraint firstAttribute="trailing" secondItem="iBE-7x-Dht" secondAttribute="trailing" constant="20" id="D6d-zP-3Rs"/>
+                                    <constraint firstItem="iBE-7x-Dht" firstAttribute="leading" secondItem="itf-Lr-x6U" secondAttribute="leading" constant="20" symbolic="YES" id="ncg-bJ-knj"/>
                                     <constraint firstItem="Ts7-sG-fho" firstAttribute="leading" secondItem="itf-Lr-x6U" secondAttribute="leading" id="ps8-eg-Wmr"/>
                                     <constraint firstAttribute="trailing" secondItem="Ts7-sG-fho" secondAttribute="trailing" id="zhP-s2-y3e"/>
                                 </constraints>
@@ -64,6 +94,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="amountTextField" destination="2yT-fe-DY1" id="8nt-hX-mwC"/>
+                        <outlet property="nameTextField" destination="bbw-YA-MFh" id="AUj-6F-gTf"/>
+                        <outlet property="tableView" destination="Ts7-sG-fho" id="PM6-OL-qnX"/>
                         <outlet property="totalSumLabel" destination="3So-mX-Lpn" id="TSX-IK-QU9"/>
                     </connections>
                 </viewController>
