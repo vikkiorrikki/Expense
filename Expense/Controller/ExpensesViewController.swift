@@ -44,7 +44,7 @@ class ExpensesViewController: UIViewController {
             return
         }
         guard let source = unwindSegue.source as? NewExpenseViewController else { return }
-        let newExpense = Expense(name: source.expenseName, count: source.expenseAmount)
+        let newExpense = Expense(name: source.expenseName ?? "", count: source.expenseAmount ?? 0.0)
         expenses.append(newExpense)
         for i in 0..<expenses.count {
             print(expenses[i])

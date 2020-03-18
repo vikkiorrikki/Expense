@@ -18,8 +18,8 @@ class NewExpenseViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    var expenseName: String = ""
-    var expenseAmount: Double = 0.0
+    var expenseName: String?
+    var expenseAmount: Double?
     
     @IBAction func addNewExpenseTouched(_ sender: UIButton) {
         
@@ -27,8 +27,8 @@ class NewExpenseViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        expenseName = expenseNameTextField.text!
-        expenseAmount = Double(expenseAmountTextField.text!)!
+            expenseName = expenseNameTextField.text
+            expenseAmount = Double(expenseAmountTextField.text!)
     }
     
     /*
