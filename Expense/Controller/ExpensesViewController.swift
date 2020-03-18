@@ -8,19 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ExpensesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalSumLabel: UILabel!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var amountTextField: UITextField!
     
     var expenses: [Expense] = [
         Expense(name: "Amsterdam", count: 100),
         Expense(name: "Wineglass", count: 1.5),
         Expense(name: "T-shirt", count: 30)
     ]
-            
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,19 +26,7 @@ class ViewController: UIViewController {
         updateTotalSum()
         // Do any additional setup after loading the view.
     }
-
-    @IBAction func touchNewExpense(_ sender: UIButton) {
-        let expenseName = nameTextField.text!
-        let expenseAmount = Double(amountTextField.text!)!
-        
-        let newExpense = Expense(name: expenseName, count: expenseAmount)
-        expenses.append(newExpense)
-        for i in 0..<expenses.count {
-            print(expenses[i])
-        }
-        updateTotalSum()
-        self.tableView.reloadData()
-    }
+    
     func updateTotalSum(){
         var totalSum: Double = 0.0
         for i in 0..<expenses.count {
@@ -48,9 +34,28 @@ class ViewController: UIViewController {
         }
         totalSumLabel.text = "Total Sum: \(totalSum)"
     }
+    
+    @IBAction func touchNewExpense(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToAddNewExpense", sender: self)
+    }
+    
+    @IBAction func addNewExpenseToTableView(_ unwindSegue: UIStoryboardSegue) {
+        guard unwindSegue.identifier == "goBackFromAddNewExpense" else {
+            return
+        }
+        guard let source = unwindSegue.source as? NewExpenseViewController else { return }
+        let newExpense = Expense(name: source.expenseName, count: source.expenseAmount)
+        expenses.append(newExpense)
+        for i in 0..<expenses.count {
+            print(expenses[i])
+        }
+        updateTotalSum()
+        self.tableView.reloadData()
+    }
+    
 }
 
-extension ViewController: UITableViewDataSource{
+extension ExpensesViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return expenses.count
     }
@@ -68,6 +73,7 @@ extension ViewController: UITableViewDataSource{
 
         self.expenses.remove(at: indexPath.row)
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        updateTotalSum()
       }
     }
 }
