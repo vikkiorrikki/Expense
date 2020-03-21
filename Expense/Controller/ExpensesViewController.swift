@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExpensesViewController: UIViewController {
+class ExpensesViewController: UIViewController, ExpenseViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalSumLabel: UILabel!
@@ -21,38 +21,29 @@ class ExpensesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.dataSource = self
         updateTotalSum()
-        // Do any additional setup after loading the view.
     }
     
     func updateTotalSum(){
         var totalSum: Double = 0.0
-        for i in 0..<expenses.count {
-            totalSum += expenses[i].count
+        for expense in expenses {
+            totalSum += expense.count
         }
         totalSumLabel.text = "Total Sum: \(totalSum)"
     }
     
     @IBAction func touchNewExpense(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToAddNewExpense", sender: self)
+        let controller : NewExpenseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
+        controller.delegate = self
+        self.present(controller, animated: true, completion: nil)
     }
     
-    @IBAction func addNewExpenseToTableView(_ unwindSegue: UIStoryboardSegue) {
-        guard unwindSegue.identifier == "goBackFromAddNewExpense" else {
-            return
-        }
-        guard let source = unwindSegue.source as? NewExpenseViewController else { return }
-        let newExpense = Expense(name: source.expenseName ?? "", count: source.expenseAmount ?? 0.0)
+    func addNewExpenseTouched(newExpense: Expense){
         expenses.append(newExpense)
-        for i in 0..<expenses.count {
-            print(expenses[i])
-        }
         updateTotalSum()
         self.tableView.reloadData()
     }
-    
 }
 
 extension ExpensesViewController: UITableViewDataSource{

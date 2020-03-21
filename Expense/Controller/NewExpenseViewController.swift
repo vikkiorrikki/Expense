@@ -15,30 +15,15 @@ class NewExpenseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-    var expenseName: String?
-    var expenseAmount: Double?
+    
+    var delegate: ExpensesViewController?
     
     @IBAction func addNewExpenseTouched(_ sender: UIButton) {
-        
+        if let name = expenseNameTextField.text, let amountText = expenseAmountTextField.text, let amount = Double(amountText){
+            let newExpense = Expense(name: name, count: amount)
+            delegate?.addNewExpenseTouched(newExpense: newExpense)
+        }
         self.dismiss(animated: true, completion: nil)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            expenseName = expenseNameTextField.text
-            expenseAmount = Double(expenseAmountTextField.text!)
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
