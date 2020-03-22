@@ -16,10 +16,6 @@ class ExpensesViewController: UIViewController, ExpenseViewControllerDelegate {
     let keyForUserDefaults = "savedExpenses"
     
     var expenses = [Expense]()
-        /*Expense(name: "Amsterdam", count: 100),
-        Expense(name: "Wineglass", count: 1.5),
-        Expense(name: "T-shirt", count: 30)
-    ]*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +29,6 @@ class ExpensesViewController: UIViewController, ExpenseViewControllerDelegate {
         }
         print(expenses)
     }
-    /*override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.reloadData()
-    }*/
     
     func updateTotalSum(){
         var totalSum: Double = 0.0
@@ -62,6 +54,7 @@ class ExpensesViewController: UIViewController, ExpenseViewControllerDelegate {
     }
 }
 
+//MARK: - Table View
 extension ExpensesViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return expenses.count
@@ -82,7 +75,8 @@ extension ExpensesViewController: UITableViewDataSource{
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
         updateTotalSum()
         
-//        defaults.remov
+        defaults.set(try? PropertyListEncoder().encode(expenses), forKey: keyForUserDefaults) //update userDefaults after removing cell
+        defaults.synchronize()
       }
     }
 }
