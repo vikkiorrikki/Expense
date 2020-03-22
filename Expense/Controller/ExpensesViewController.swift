@@ -12,18 +12,31 @@ class ExpensesViewController: UIViewController, ExpenseViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalSumLabel: UILabel!
+    let defaults = UserDefaults.standard
+    let keyForUserDefaults = "savedExpenses"
     
-    var expenses: [Expense] = [
-        Expense(name: "Amsterdam", count: 100),
+    var expenses = [Expense]()
+        /*Expense(name: "Amsterdam", count: 100),
         Expense(name: "Wineglass", count: 1.5),
         Expense(name: "T-shirt", count: 30)
-    ]
+    ]*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         updateTotalSum()
+        
+        if let data = defaults.value(forKey: keyForUserDefaults){
+            expenses = try! PropertyListDecoder().decode([Expense].self, from: data as! Data)
+        }else{
+            print("error decode")
+        }
+        print(expenses)
     }
+    /*override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }*/
     
     func updateTotalSum(){
         var totalSum: Double = 0.0
@@ -43,6 +56,9 @@ class ExpensesViewController: UIViewController, ExpenseViewControllerDelegate {
         expenses.append(newExpense)
         updateTotalSum()
         self.tableView.reloadData()
+        
+        defaults.set(try? PropertyListEncoder().encode(expenses), forKey: keyForUserDefaults)
+        defaults.synchronize()
     }
 }
 
@@ -65,6 +81,8 @@ extension ExpensesViewController: UITableViewDataSource{
         self.expenses.remove(at: indexPath.row)
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
         updateTotalSum()
+        
+//        defaults.remov
       }
     }
 }

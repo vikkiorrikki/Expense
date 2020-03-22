@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Expense{
+struct Expense: Codable{
     let name: String
     let count: Double
 }
