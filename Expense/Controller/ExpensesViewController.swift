@@ -8,35 +8,53 @@
 
 import UIKit
 
-class ExpensesViewController: UIViewController, ExpenseViewControllerDelegate {
 
+
+class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
+
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalSumLabel: UILabel!
-    let defaults = UserDefaults.standard
-    let keyForUserDefaults = "savedExpenses"
+    @IBOutlet weak var currentSumLabel: UILabel!
+    @IBOutlet weak var neededSumLabel: UILabel!
     
-    var expenses = [Expense]()
+    // MARK: - Properties
+    
+    let storageService = UserDefaultsStorageService()
+    var expenses = [Expense]() {
+        didSet {
+            let totalSum = updateTotalSum()
+            updateNeedeSum(totalSum: totalSum)
+        }
+    }
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
-        updateTotalSum()
-        
-        if let data = defaults.value(forKey: keyForUserDefaults){
-            expenses = try! PropertyListDecoder().decode([Expense].self, from: data as! Data)
-        }else{
-            print("error decode")
-        }
-        print(expenses)
+
+        expenses = storageService.loadExpenses()
     }
     
-    func updateTotalSum(){
+    // MARK: - Private methods
+    
+    private func updateTotalSum() -> Double {
         var totalSum: Double = 0.0
         for expense in expenses {
-            totalSum += expense.count
+            totalSum += expense.amount
         }
         totalSumLabel.text = "Total Sum: \(totalSum)"
+        return totalSum
     }
+    
+    private func updateNeedeSum(totalSum: Double) {
+        let currentSum = 100.0 // will count from расход/приход
+        let neddedSum = totalSum - currentSum
+        neededSumLabel.text = "Needed: \(neddedSum)"
+    }
+    // MARK: - Actions
     
     @IBAction func touchNewExpense(_ sender: UIButton) {
         let controller : NewExpenseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
@@ -44,18 +62,19 @@ class ExpensesViewController: UIViewController, ExpenseViewControllerDelegate {
         self.present(controller, animated: true, completion: nil)
     }
     
-    func addNewExpenseTouched(newExpense: Expense){
+    // MARK: - ExpensesViewControllerDelegate
+    
+    func addNewExpenseTouched(newExpense: Expense) {
         expenses.append(newExpense)
-        updateTotalSum()
         self.tableView.reloadData()
         
-        defaults.set(try? PropertyListEncoder().encode(expenses), forKey: keyForUserDefaults)
-        defaults.synchronize()
+        storageService.saveExpenses(expenses)
     }
 }
 
-//MARK: - Table View
-extension ExpensesViewController: UITableViewDataSource{
+//MARK: - UITableViewDataSource
+
+extension ExpensesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return expenses.count
     }
@@ -63,20 +82,17 @@ extension ExpensesViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath)
-        cell.textLabel?.text = "\(expenses[indexPath.row].name): \(expenses[indexPath.row].count)"
+        cell.textLabel?.text = "\(expenses[indexPath.row].name): \(expenses[indexPath.row].amount)"
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
-
         self.expenses.remove(at: indexPath.row)
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
-        updateTotalSum()
         
-        defaults.set(try? PropertyListEncoder().encode(expenses), forKey: keyForUserDefaults) //update userDefaults after removing cell
-        defaults.synchronize()
+        storageService.saveExpenses(expenses)
       }
     }
 }

@@ -10,5 +10,5 @@ import Foundation
 
 struct Expense: Codable{
     let name: String
-    let count: Double
+    let amount: Double
 }

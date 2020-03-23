@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ExpenseViewControllerDelegate {
+protocol ExpensesViewControllerDelegate: class {
     func addNewExpenseTouched (newExpense: Expense)
 }
