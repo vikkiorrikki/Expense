@@ -107,7 +107,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3n-d3-XMT">
-                                <rect key="frame" x="70" y="324" width="274" height="48"/>
+                                <rect key="frame" x="70" y="322" width="274" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
@@ -120,18 +120,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VM8-Xi-CxL">
+                                <rect key="frame" x="20" y="274" width="374" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.60784313725490191" green="0.10980392156862745" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="7OE-4h-9dU" firstAttribute="top" secondItem="iBy-fs-aSz" secondAttribute="top" id="0yo-FB-YPH"/>
+                            <constraint firstItem="z3n-d3-XMT" firstAttribute="top" secondItem="VM8-Xi-CxL" secondAttribute="bottom" constant="30" id="5bn-FQ-5Ve"/>
+                            <constraint firstItem="iBy-fs-aSz" firstAttribute="trailing" secondItem="VM8-Xi-CxL" secondAttribute="trailing" constant="20" id="CCo-aI-rJV"/>
+                            <constraint firstItem="VM8-Xi-CxL" firstAttribute="top" secondItem="pM9-UL-bgn" secondAttribute="bottom" constant="50" id="FRO-sI-Fyj"/>
                             <constraint firstItem="iBy-fs-aSz" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="z3n-d3-XMT" secondAttribute="bottom" constant="559" id="Olw-ZY-HS8"/>
                             <constraint firstItem="iBy-fs-aSz" firstAttribute="trailing" secondItem="ZES-GY-8kq" secondAttribute="trailing" constant="60" id="XWc-PQ-I7r"/>
                             <constraint firstItem="ZES-GY-8kq" firstAttribute="top" secondItem="7OE-4h-9dU" secondAttribute="bottom" constant="50" id="YPo-1P-0JX"/>
+                            <constraint firstItem="VM8-Xi-CxL" firstAttribute="leading" secondItem="iBy-fs-aSz" secondAttribute="leading" constant="20" id="bJp-m9-CjU"/>
                             <constraint firstItem="z3n-d3-XMT" firstAttribute="leading" secondItem="iBy-fs-aSz" secondAttribute="leading" constant="70" id="cXt-EM-Mga"/>
                             <constraint firstItem="iBy-fs-aSz" firstAttribute="trailing" secondItem="7OE-4h-9dU" secondAttribute="trailing" id="ch4-O7-jQ2"/>
                             <constraint firstItem="pM9-UL-bgn" firstAttribute="leading" secondItem="iBy-fs-aSz" secondAttribute="leading" constant="60" id="cwq-4b-LI3"/>
                             <constraint firstItem="iBy-fs-aSz" firstAttribute="trailing" secondItem="z3n-d3-XMT" secondAttribute="trailing" constant="70" id="eL6-dl-aoM"/>
-                            <constraint firstItem="z3n-d3-XMT" firstAttribute="top" secondItem="pM9-UL-bgn" secondAttribute="bottom" constant="100" id="gT4-BB-dPE"/>
                             <constraint firstItem="iBy-fs-aSz" firstAttribute="trailing" secondItem="pM9-UL-bgn" secondAttribute="trailing" constant="60" id="hIH-cm-kkT"/>
                             <constraint firstItem="ZES-GY-8kq" firstAttribute="leading" secondItem="iBy-fs-aSz" secondAttribute="leading" constant="60" id="joi-l1-FqW"/>
                             <constraint firstItem="7OE-4h-9dU" firstAttribute="leading" secondItem="iBy-fs-aSz" secondAttribute="leading" id="rAA-lS-WMY"/>
@@ -140,6 +149,7 @@
                         <viewLayoutGuide key="safeArea" id="iBy-fs-aSz"/>
                     </view>
                     <connections>
+                        <outlet property="errorMessageLabel" destination="VM8-Xi-CxL" id="1KY-7k-Hoy"/>
                         <outlet property="expenseAmountTextField" destination="pM9-UL-bgn" id="bjm-oP-FGB"/>
                         <outlet property="expenseNameTextField" destination="ZES-GY-8kq" id="weX-bh-aaM"/>
                     </connections>
