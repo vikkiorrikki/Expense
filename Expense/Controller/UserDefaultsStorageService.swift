@@ -20,10 +20,14 @@ class UserDefaultsStorageService {
     }
     
     func loadExpenses() -> [Expense] {
-        let data = defaults.value(forKey: keyForUserDefaults)
-        //TODO: need to handle when data = nil (first load of app)
-        let expenses = try! PropertyListDecoder().decode([Expense].self, from: data as! Data)
-        print("decode")
-        return expenses
+        if let data = defaults.value(forKey: keyForUserDefaults) {
+            let expenses = try! PropertyListDecoder().decode([Expense].self, from: data as! Data)
+            print("decode")
+            return expenses
+        } else {
+            self.saveExpenses([])
+            return []
+        }
+        
     }
 }

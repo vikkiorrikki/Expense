@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
 
     // MARK: - IBOutlets
@@ -34,10 +32,9 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "ExpenseCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
 
         expenses = storageService.loadExpenses()
-        tableView.register(UINib(nibName: "ExpenseCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
-        
     }
     
     // MARK: - Private methods
