@@ -36,6 +36,8 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         tableView.dataSource = self
 
         expenses = storageService.loadExpenses()
+        tableView.register(UINib(nibName: "ExpenseCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+        
     }
     
     // MARK: - Private methods
@@ -81,8 +83,9 @@ extension ExpensesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath)
-        cell.textLabel?.text = "\(expenses[indexPath.row].name): \(expenses[indexPath.row].amount)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! ExpenseCell
+        cell.nameLabel.text = "\(expenses[indexPath.row].name)"
+        cell.amountLabel.text = "\(expenses[indexPath.row].amount)"
         
         return cell
     }
