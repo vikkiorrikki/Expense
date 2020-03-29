@@ -28,6 +28,5 @@ class UserDefaultsStorageService {
             self.saveExpenses([])
             return []
         }
-        
     }
 }

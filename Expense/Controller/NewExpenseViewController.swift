@@ -22,37 +22,42 @@ class NewExpenseViewController: UIViewController {
     }
     
     @IBAction func addNewExpenseTouched(_ sender: UIButton) {
-        if !((expenseNameTextField.text)!.isEmpty) || !((expenseAmountTextField.text)!.isEmpty) {
-            guard let name = expenseNameTextField.text, !name.isEmpty else {
-                errorMessageLabel.isHidden = false
-                errorMessageLabel.text! = "Name is empty. Please fill field."
-                
-                expenseNameTextField.layer.borderColor = #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1)
-                expenseNameTextField.layer.borderWidth = 1.0
-                expenseAmountTextField.layer.borderWidth = 0.0
-                return
-            }
-            guard let amountText = expenseAmountTextField.text, let amount = Double(amountText) else {
-                errorMessageLabel.isHidden = false
-                errorMessageLabel.text! = "Amount is empty. Please fill field."
-                
-                expenseAmountTextField.layer.borderColor = #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1)
-                expenseAmountTextField.layer.borderWidth = 1.0
-                expenseNameTextField.layer.borderWidth = 0.0
-                return
-            }
-            let newExpense = Expense(name: name, amount: amount)
-            delegate?.addNewExpenseTouched(newExpense: newExpense)
-            self.dismiss(animated: true, completion: nil)
-        } else {
-            errorMessageLabel.isHidden = false
-            errorMessageLabel.text! = "Fields are empty. Please fill fields."
+        guard !((expenseNameTextField.text)!.isEmpty) || !((expenseAmountTextField.text)!.isEmpty) else {
+            setErrorMessageForLabel(label: errorMessageLabel, isHidden: false, errorMessage: "Fields are empty. Please fill fields.")
+            setColorBorderForTextField(textField: expenseNameTextField, color: #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1), borderWidth: 1.0)
+            setColorBorderForTextField(textField: expenseAmountTextField, color: #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1), borderWidth: 1.0)
             
-            expenseNameTextField.layer.borderColor = #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1)
-            expenseNameTextField.layer.borderWidth = 1.0
-            
-            expenseAmountTextField.layer.borderColor = #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1)
-            expenseAmountTextField.layer.borderWidth = 1.0
+            return
         }
+        
+        guard let name = expenseNameTextField.text, !name.isEmpty else {
+            setErrorMessageForLabel(label: errorMessageLabel, isHidden: false, errorMessage: "Name is empty. Please fill field.")
+            setColorBorderForTextField(textField: expenseNameTextField, color: #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1), borderWidth: 1.0)
+            setColorBorderForTextField(textField: expenseAmountTextField, color: UIColor.clear.cgColor, borderWidth: 0.0)
+            
+            return
+        }
+        
+        guard let amountText = expenseAmountTextField.text, let amount = Double(amountText) else {
+            setErrorMessageForLabel(label: errorMessageLabel, isHidden: false, errorMessage: "Amount is empty. Please fill field.")
+            setColorBorderForTextField(textField: expenseAmountTextField, color: #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1), borderWidth: 1.0)
+            setColorBorderForTextField(textField: expenseNameTextField, color: UIColor.clear.cgColor, borderWidth: 0.0)
+            
+            return
+        }
+        
+        let newExpense = Expense(name: name, amount: amount)
+        delegate?.addNewExpenseTouched(newExpense: newExpense)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func setColorBorderForTextField(textField: UITextField, color: CGColor, borderWidth: CGFloat) {
+        textField.layer.borderColor = color
+        textField.layer.borderWidth = borderWidth
+    }
+    
+    func setErrorMessageForLabel(label: UILabel, isHidden: Bool, errorMessage: String) {
+        label.isHidden = isHidden
+        label.text! = errorMessage
     }
 }
