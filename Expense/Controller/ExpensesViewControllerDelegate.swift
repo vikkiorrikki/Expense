@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol ExpensesViewControllerDelegate: class {
     func addNewExpenseTouched (newExpense: Expense)

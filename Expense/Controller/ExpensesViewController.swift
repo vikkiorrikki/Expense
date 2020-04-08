@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
 
     // MARK: - IBOutlets
     
+    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalSumLabel: UILabel!
     @IBOutlet weak var currentSumLabel: UILabel!
@@ -19,11 +21,19 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     // MARK: - Properties
     
-    let storageService = UserDefaultsStorageService()
+//    let storageService = UserDefaultsStorageService()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     var expenses = [Expense]() {
         didSet {
             let totalSum = updateTotalSum()
             updateNeedeSum(totalSum: totalSum)
+
+            if expenses.isEmpty {
+                emptyView.isHidden = false
+            } else {
+                emptyView.isHidden = true
+            }
         }
     }
     
@@ -32,10 +42,8 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "ExpenseCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
-        tableView.restore()
-
-        expenses = storageService.loadExpenses()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        loadExpenses()
     }
     
     // MARK: - Private methods
@@ -66,9 +74,28 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     func addNewExpenseTouched(newExpense: Expense) {
         expenses.append(newExpense)
-        self.tableView.reloadData()
         
-        storageService.saveExpenses(expenses)
+        saveExpense()
+    }
+    
+    //MARK: - Data Manipulation Methods
+    
+    func saveExpense() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
+        tableView.reloadData()
+    }
+    
+    func loadExpenses(with request: NSFetchRequest<Expense> = Expense.fetchRequest()) {
+        do {
+            expenses = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+        tableView.reloadData()
     }
 }
 
@@ -76,19 +103,14 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
 
 extension ExpensesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if expenses.count == 0{
-            tableView.setEmptyView(title: "You don't have any expenses.", message: "Your expenses will be in here.")
-        } else {
-            tableView.restore()
-        }
         return expenses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! ExpenseCell
-        cell.nameLabel.text = "\(expenses[indexPath.row].name)"
-        cell.amountLabel.text = "\(expenses[indexPath.row].amount)"
+        cell.expenseNameLabel.text = "\(expenses[indexPath.row].name!)"
+        cell.expenseAmountLabel.text = "\(expenses[indexPath.row].amount)"
         
         return cell
     }
@@ -96,9 +118,10 @@ extension ExpensesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
         self.expenses.remove(at: indexPath.row)
-        self.tableView.deleteRows(at: [indexPath], with: .automatic)
         
-        storageService.saveExpenses(expenses)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        saveExpense()
+        
       }
     }
 }
