@@ -53,6 +53,7 @@ class NewExpenseViewController: UIViewController {
                     let newExpense = Expense(context: context)
                     newExpense.name = name
                     newExpense.amount = amount
+                    newExpense.done = false
                     delegate?.addNewExpenseTouched(newExpense: newExpense)
                     self.dismiss(animated: true, completion: nil)
                 } else {

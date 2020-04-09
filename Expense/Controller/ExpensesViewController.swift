@@ -21,13 +21,11 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     // MARK: - Properties
     
-//    let storageService = UserDefaultsStorageService()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+
     var expenses = [Expense]() {
         didSet {
-            let totalSum = updateTotalSum()
-            updateNeedeSum(totalSum: totalSum)
+            updateNeededSum(with: updateTotalSum())
 
             if expenses.isEmpty {
                 emptyView.isHidden = false
@@ -41,6 +39,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
         tableView.dataSource = self
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         loadExpenses()
@@ -51,17 +50,21 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     private func updateTotalSum() -> Double {
         var totalSum: Double = 0.0
         for expense in expenses {
-            totalSum += expense.amount
+            if expense.done != true {
+                totalSum += expense.amount
+            }
         }
+        
         totalSumLabel.text = "Total Sum: \(totalSum)"
         return totalSum
     }
     
-    private func updateNeedeSum(totalSum: Double) {
+    private func updateNeededSum(with totalSum: Double) {
         let currentSum = 100.0 // will count from расход/приход
-        let neddedSum = totalSum - currentSum
-        neededSumLabel.text = "Needed: \(neddedSum)"
+        let neededSum = totalSum - currentSum
+        neededSumLabel.text = neededSum > 0 ? "Needed: \(neededSum)" : "Needed: 0"
     }
+    
     // MARK: - Actions
     
     @IBAction func touchNewExpense(_ sender: UIButton) {
@@ -103,6 +106,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
 
 extension ExpensesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return expenses.count
     }
     
@@ -111,13 +115,15 @@ extension ExpensesViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! ExpenseCell
         cell.expenseNameLabel.text = "\(expenses[indexPath.row].name!)"
         cell.expenseAmountLabel.text = "\(expenses[indexPath.row].amount)"
+        cell.accessoryType = expenses[indexPath.row].done ? .checkmark : .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
-        self.expenses.remove(at: indexPath.row)
+        context.delete(expenses[indexPath.row])
+        expenses.remove(at: indexPath.row)
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
         saveExpense()
@@ -125,3 +131,16 @@ extension ExpensesViewController: UITableViewDataSource {
       }
     }
 }
+
+//MARK: - TableView Delegate Methods
+
+extension ExpensesViewController: UITableViewDelegate {
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            expenses[indexPath.row].done = !expenses[indexPath.row].done
+
+            saveExpense()
+            updateNeededSum(with: updateTotalSum())
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
+}
+
