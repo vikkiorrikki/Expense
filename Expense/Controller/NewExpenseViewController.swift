@@ -50,12 +50,18 @@ class NewExpenseViewController: UIViewController {
                 
             } else {
                 if let amount = Double(amountText) {
-                    let newExpense = Expense(context: context)
-                    newExpense.name = name
-                    newExpense.amount = amount
-                    newExpense.done = false
-                    delegate?.addNewExpenseTouched(newExpense: newExpense)
-                    self.dismiss(animated: true, completion: nil)
+                    if amount > 0 {
+                        let newExpense = Expense(context: context)
+                        newExpense.name = name
+                        newExpense.amount = amount
+                        newExpense.done = false
+                        delegate?.addNewExpenseTouched(newExpense: newExpense)
+                        self.dismiss(animated: true, completion: nil)
+                    } else {
+                        setErrorMessageForLabel(with: "Amount should be more than 0")
+                        setRedBorder(textField: expenseAmountTextField)
+                        setNotBorder(textField: expenseNameTextField)
+                    }
                 } else {
                     setErrorMessageForLabel(with: "Amount should be as double")
                     setRedBorder(textField: expenseAmountTextField)
