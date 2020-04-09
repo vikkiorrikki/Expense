@@ -15,19 +15,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Sum: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcH-YS-8PV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Needful Sum: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcH-YS-8PV">
                                 <rect key="frame" x="50" y="44" width="314" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current: 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPn-02-MXu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Sum: 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPn-02-MXu">
                                 <rect key="frame" x="50" y="106" width="314" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Needed:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRW-IJ-mhX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Sum:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRW-IJ-mhX">
                                 <rect key="frame" x="50" y="150" width="314" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -123,10 +123,11 @@
                         <constraints>
                             <constraint firstItem="RAU-fU-dIk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="44q-iA-KVD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RAU-fU-dIk" secondAttribute="trailing" constant="50" id="4UX-Do-BZC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wcH-YS-8PV" secondAttribute="trailing" constant="50" id="4y6-zJ-TRK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="wcH-YS-8PV" secondAttribute="trailing" constant="50" id="4y6-zJ-TRK"/>
                             <constraint firstItem="b7H-uX-0Za" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5SX-4B-fFG"/>
                             <constraint firstItem="b7H-uX-0Za" firstAttribute="top" secondItem="jRW-IJ-mhX" secondAttribute="bottom" constant="20" id="60J-uo-ZPL"/>
-                            <constraint firstItem="wcH-YS-8PV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="9ue-qP-n0U"/>
+                            <constraint firstItem="wcH-YS-8PV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6bj-wA-naX"/>
+                            <constraint firstItem="wcH-YS-8PV" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="9ue-qP-n0U"/>
                             <constraint firstItem="RAU-fU-dIk" firstAttribute="top" secondItem="b7H-uX-0Za" secondAttribute="bottom" id="BD5-N2-ged"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jRW-IJ-mhX" secondAttribute="trailing" constant="50" id="Kyp-EE-miL"/>
                             <constraint firstItem="b7H-uX-0Za" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LrS-Rv-DI9"/>
@@ -147,9 +148,9 @@
                     <connections>
                         <outlet property="currentSumLabel" destination="ZPn-02-MXu" id="7yA-gA-GW7"/>
                         <outlet property="emptyView" destination="dJe-IA-iap" id="kxs-7D-lKX"/>
-                        <outlet property="neededSumLabel" destination="jRW-IJ-mhX" id="E1S-BP-bZn"/>
+                        <outlet property="neededSumLabel" destination="wcH-YS-8PV" id="cQS-zj-wdi"/>
                         <outlet property="tableView" destination="b7H-uX-0Za" id="U8v-5N-dpw"/>
-                        <outlet property="totalSumLabel" destination="wcH-YS-8PV" id="o1q-q4-6ky"/>
+                        <outlet property="totalSumLabel" destination="jRW-IJ-mhX" id="mL6-xZ-7It"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

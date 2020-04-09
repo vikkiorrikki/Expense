@@ -62,7 +62,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     private func updateNeededSum(with totalSum: Double) {
         let currentSum = 100.0 // will count from расход/приход
         let neededSum = totalSum - currentSum
-        neededSumLabel.text = neededSum > 0 ? "Needed: \(neededSum)" : "Needed: 0"
+        neededSumLabel.text = neededSum > 0 ? "Needful Sum: \(neededSum)" : "Needful Sum: 0"
     }
     
     // MARK: - Actions
