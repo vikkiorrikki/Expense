@@ -43,6 +43,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         tableView.dataSource = self
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         loadExpenses()
+        print("viewDidLoad")
     }
     
     // MARK: - Private methods
@@ -67,16 +68,9 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     // MARK: - Actions
     
-    @IBAction func touchNewExpense(_ sender: UIButton) {
+    @IBAction func touchMenuButton(_ sender: UIButton) {
         let controller : NewExpenseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
         controller.delegate = self
-        self.present(controller, animated: true, completion: nil)
-    }
-    @IBAction func touchMenuButton(_ sender: UIButton) {
-        let controller : MenuPopupViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuPopup") as! MenuPopupViewController
-        controller.delegate = self
-        self.present(controller, animated: true, completion: nil)
-        
         
     }
     
@@ -84,8 +78,9 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     func addNewExpenseTouched(newExpense: Expense) {
         expenses.append(newExpense)
-        
+        print("addNewExpenseTouched")
         saveExpense()
+
     }
     
     //MARK: - Data Manipulation Methods
@@ -97,6 +92,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
             print("Error saving context \(error)")
         }
         tableView.reloadData()
+        print("saveExpense")
     }
     
     func loadExpenses(with request: NSFetchRequest<Expense> = Expense.fetchRequest()) {
@@ -106,6 +102,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
             print("Error fetching data from context \(error)")
         }
         tableView.reloadData()
+        print("loadExpenses")
     }
 }
 
