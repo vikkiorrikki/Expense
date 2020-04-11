@@ -118,6 +118,15 @@
                                     <action selector="touchNewExpense:" destination="BYZ-38-t0r" eventType="touchUpInside" id="04s-e6-6de"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccr-qT-SjQ">
+                                <rect key="frame" x="351" y="818" width="43" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="touchMenuButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AhY-xq-oxa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -155,7 +164,54 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="117.85714285714285"/>
+            <point key="canvasLocation" x="273.91304347826087" y="117.85714285714285"/>
+        </scene>
+        <!--Menu Popup View Controller-->
+        <scene sceneID="MbX-9m-OCt">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Bm-TB-4hS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="MenuPopup" modalPresentationStyle="overCurrentContext" id="TUJ-Fw-SMc" customClass="MenuPopupViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="TopLeft" id="9cU-I4-P7F">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O5F-tb-2tH">
+                                <rect key="frame" x="0.0" y="712" width="414" height="150"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UGP-9Y-T6R">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.89671699707994235" green="0.90588235289999997" blue="0.73602512719824731" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="New expense"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wC4-Sq-JLd">
+                                        <rect key="frame" x="0.0" y="100" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.82745098039999998" green="0.95686274510000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5E-24-vKr">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.90588235289999997" green="0.81526797710145349" blue="0.89115471335275964" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="New income"/>
+                                    </button>
+                                </subviews>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.30414829371165641" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="O5F-tb-2tH" firstAttribute="top" secondItem="aNX-H6-jEN" secondAttribute="top" constant="668" id="PJj-63-IEU"/>
+                            <constraint firstItem="O5F-tb-2tH" firstAttribute="leading" secondItem="aNX-H6-jEN" secondAttribute="leading" id="RC1-yn-rSh"/>
+                            <constraint firstItem="O5F-tb-2tH" firstAttribute="bottom" secondItem="aNX-H6-jEN" secondAttribute="bottom" id="kDe-Ze-UyH"/>
+                            <constraint firstItem="O5F-tb-2tH" firstAttribute="trailing" secondItem="aNX-H6-jEN" secondAttribute="trailing" id="lhc-SH-cxO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aNX-H6-jEN"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="414" height="150"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1024.6376811594205" y="117.85714285714285"/>
         </scene>
         <!--New Expense View Controller-->
         <scene sceneID="leO-Dz-npe">
@@ -225,7 +281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V1Z-b8-tTb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1089.8550724637682" y="117.85714285714285"/>
+            <point key="canvasLocation" x="1757" y="118"/>
         </scene>
     </scenes>
     <resources>

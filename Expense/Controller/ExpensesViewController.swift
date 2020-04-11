@@ -72,6 +72,13 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         controller.delegate = self
         self.present(controller, animated: true, completion: nil)
     }
+    @IBAction func touchMenuButton(_ sender: UIButton) {
+        let controller : MenuPopupViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuPopup") as! MenuPopupViewController
+        controller.delegate = self
+        self.present(controller, animated: true, completion: nil)
+        
+        
+    }
     
     // MARK: - ExpensesViewControllerDelegate
     

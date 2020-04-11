@@ -17,6 +17,7 @@
 		F568D82D243E8D540033CADD /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F568D82B243E8D540033CADD /* DataModel.xcdatamodeld */; };
 		F59837AE2422C7800016AD69 /* NewExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59837AD2422C7800016AD69 /* NewExpenseViewController.swift */; };
 		F59837B724263A1A0016AD69 /* ExpensesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59837B624263A1A0016AD69 /* ExpensesViewControllerDelegate.swift */; };
+		F5F1D0FD24426EEE00E2ABFF /* MenuPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F1D0FC24426EEE00E2ABFF /* MenuPopupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		F568D82C243E8D540033CADD /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F59837AD2422C7800016AD69 /* NewExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseViewController.swift; sourceTree = "<group>"; };
 		F59837B624263A1A0016AD69 /* ExpensesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewControllerDelegate.swift; sourceTree = "<group>"; };
+		F5F1D0FC24426EEE00E2ABFF /* MenuPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuPopupViewController.swift; path = Expense/View/MenuPopupViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				F519D610241EC3D3009B9A3B /* ExpensesViewController.swift */,
+				F5F1D0FC24426EEE00E2ABFF /* MenuPopupViewController.swift */,
 				F59837AD2422C7800016AD69 /* NewExpenseViewController.swift */,
 				F59837B624263A1A0016AD69 /* ExpensesViewControllerDelegate.swift */,
 			);
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5F1D0FD24426EEE00E2ABFF /* MenuPopupViewController.swift in Sources */,
 				F59837B724263A1A0016AD69 /* ExpensesViewControllerDelegate.swift in Sources */,
 				F519D611241EC3D3009B9A3B /* ExpensesViewController.swift in Sources */,
 				F519D60D241EC3D3009B9A3B /* AppDelegate.swift in Sources */,
