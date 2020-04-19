@@ -39,11 +39,11 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         tableView.dataSource = self
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         loadExpenses()
-        print("viewDidLoad")
     }
     
     // MARK: - Private methods
@@ -69,9 +69,10 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     // MARK: - Actions
     
     @IBAction func touchMenuButton(_ sender: UIButton) {
-        let controller : NewExpenseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuPopupVC") as! MenuPopupViewController
         controller.delegate = self
         
+        present(controller, animated: true, completion: nil)
     }
     
     // MARK: - ExpensesViewControllerDelegate

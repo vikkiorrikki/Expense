@@ -10,7 +10,18 @@ import UIKit
 
 class MenuPopupViewController: UIViewController {
 
+    weak var delegate: ExpensesViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
+    
+    @IBAction func newExpenseButtonTouched(_ sender: UIButton) {
+            let controller : NewExpenseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
+            controller.delegate = delegate
+        
+            present(controller, animated: true, completion: nil)
+        }
+
 }

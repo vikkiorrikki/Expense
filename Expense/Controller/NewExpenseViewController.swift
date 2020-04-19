@@ -56,14 +56,15 @@ class NewExpenseViewController: UIViewController {
                         newExpense.amount = amount
                         newExpense.done = false
                         delegate?.addNewExpenseTouched(newExpense: newExpense)
-                        
+
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         let secondVC = storyboard.instantiateViewController(identifier: "MainVC")
                         
                         secondVC.modalPresentationStyle = .fullScreen
                         secondVC.modalTransitionStyle = .crossDissolve
-                        
+
                         present(secondVC, animated: true, completion: nil)
+                        
                     } else {
                         setErrorMessageForLabel(with: "Amount should be more than 0")
                         setRedBorder(textField: expenseAmountTextField)

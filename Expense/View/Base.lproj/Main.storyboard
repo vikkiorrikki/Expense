@@ -116,7 +116,6 @@
                                 <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="touchMenuButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y0l-AJ-X4a"/>
-                                    <segue destination="TUJ-Fw-SMc" kind="presentation" id="6Py-9R-Sry"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -156,12 +155,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="273.91304347826087" y="117.85714285714285"/>
+            <point key="canvasLocation" x="168" y="118"/>
         </scene>
         <!--Menu Popup View Controller-->
         <scene sceneID="MbX-9m-OCt">
             <objects>
-                <viewController storyboardIdentifier="MenuPopup" modalPresentationStyle="overCurrentContext" id="TUJ-Fw-SMc" customClass="MenuPopupViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuPopupVC" modalPresentationStyle="overCurrentContext" id="TUJ-Fw-SMc" customClass="MenuPopupViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="TopLeft" id="9cU-I4-P7F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -175,7 +174,7 @@
                                         <color key="backgroundColor" red="0.89671699707994235" green="0.90588235289999997" blue="0.73602512719824731" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="New expense"/>
                                         <connections>
-                                            <segue destination="H5u-B3-uMC" kind="presentation" id="JML-NY-7CV"/>
+                                            <action selector="newExpenseButtonTouched:" destination="TUJ-Fw-SMc" eventType="touchUpInside" id="Jn1-Tm-FSs"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l5E-24-vKr">
@@ -213,21 +212,21 @@
             <objects>
                 <viewController storyboardIdentifier="NewExpenseVC" id="H5u-B3-uMC" customClass="NewExpenseViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7C2-cT-Jyg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZES-GY-8kq">
-                                <rect key="frame" x="60" y="92" width="294" height="34"/>
+                                <rect key="frame" x="60" y="136" width="294" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pM9-UL-bgn">
-                                <rect key="frame" x="60" y="146" width="294" height="34"/>
+                                <rect key="frame" x="60" y="190" width="294" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3n-d3-XMT">
-                                <rect key="frame" x="70" y="278" width="274" height="48"/>
+                                <rect key="frame" x="70" y="322" width="274" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
@@ -235,13 +234,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New expense" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OE-4h-9dU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="42"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VM8-Xi-CxL">
-                                <rect key="frame" x="20" y="230" width="374" height="18"/>
+                                <rect key="frame" x="20" y="274" width="374" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.10980392156862745" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
