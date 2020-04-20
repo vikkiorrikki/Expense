@@ -57,13 +57,7 @@ class NewExpenseViewController: UIViewController {
                         newExpense.done = false
                         delegate?.addNewExpenseTouched(newExpense: newExpense)
 
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let secondVC = storyboard.instantiateViewController(identifier: "MainVC")
-                        
-                        secondVC.modalPresentationStyle = .fullScreen
-                        secondVC.modalTransitionStyle = .crossDissolve
-
-                        present(secondVC, animated: true, completion: nil)
+                        navigationController?.popToRootViewController(animated: true)
                         
                     } else {
                         setErrorMessageForLabel(with: "Amount should be more than 0")

@@ -63,7 +63,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     private func updateNeededSum(with totalSum: Double) {
         let currentSum = 100.0 // will count from расход/приход
         let neededSum = totalSum - currentSum
-        neededSumLabel.text = neededSum > 0 ? "Needful Sum: \(neededSum)" : "Needful Sum: 0"
+        neededSumLabel.text = neededSum > 0 ? "Needed Sum: \(neededSum)" : "Needful Sum: 0"
     }
     
     // MARK: - Actions
@@ -71,8 +71,8 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     @IBAction func touchMenuButton(_ sender: UIButton) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuPopupVC") as! MenuPopupViewController
         controller.delegate = self
-        
-        present(controller, animated: true, completion: nil)
+
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - ExpensesViewControllerDelegate

@@ -14,14 +14,14 @@ class MenuPopupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.isNavigationBarHidden = true
     }
     
     @IBAction func newExpenseButtonTouched(_ sender: UIButton) {
             let controller : NewExpenseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
             controller.delegate = delegate
-        
-            present(controller, animated: true, completion: nil)
+
+            navigationController?.pushViewController(controller, animated: true)
         }
 
 }
