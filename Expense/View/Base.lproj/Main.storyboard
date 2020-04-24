@@ -162,15 +162,15 @@
         <scene sceneID="MbX-9m-OCt">
             <objects>
                 <viewController storyboardIdentifier="MenuPopupVC" modalPresentationStyle="overCurrentContext" id="TUJ-Fw-SMc" customClass="MenuPopupViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="TopLeft" id="9cU-I4-P7F">
+                    <view key="view" opaque="NO" contentMode="TopLeft" ambiguous="YES" id="9cU-I4-P7F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O5F-tb-2tH">
-                                <rect key="frame" x="0.0" y="712" width="414" height="150"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HGZ-2H-eDi">
+                                <rect key="frame" x="0.0" y="712" width="110" height="150"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UGP-9Y-T6R">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="50"/>
                                         <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.89671699707994235" green="0.90588235289999997" blue="0.73602512719824731" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="New expense"/>
@@ -179,26 +179,31 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l5E-24-vKr">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="50" width="110" height="50"/>
                                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.90588235289999997" green="0.81526797710145349" blue="0.89115471335275964" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="New income"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wC4-Sq-JLd">
-                                        <rect key="frame" x="0.0" y="100" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="100" width="110" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.82745098039999998" green="0.95686274510000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Dismiss"/>
+                                        <connections>
+                                            <action selector="touchedDismissButton:" destination="TUJ-Fw-SMc" eventType="touchUpInside" id="qy8-oY-G4N"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                            </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Pjx-hI-1rh"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.30414829371165641" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.19981786809815952" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="O5F-tb-2tH" firstAttribute="top" secondItem="aNX-H6-jEN" secondAttribute="top" constant="668" id="PJj-63-IEU"/>
-                            <constraint firstItem="O5F-tb-2tH" firstAttribute="leading" secondItem="aNX-H6-jEN" secondAttribute="leading" id="RC1-yn-rSh"/>
-                            <constraint firstItem="O5F-tb-2tH" firstAttribute="bottom" secondItem="aNX-H6-jEN" secondAttribute="bottom" id="kDe-Ze-UyH"/>
-                            <constraint firstItem="O5F-tb-2tH" firstAttribute="trailing" secondItem="aNX-H6-jEN" secondAttribute="trailing" id="lhc-SH-cxO"/>
+                            <constraint firstItem="aNX-H6-jEN" firstAttribute="trailing" secondItem="HGZ-2H-eDi" secondAttribute="trailing" id="7cf-GT-lDe"/>
+                            <constraint firstItem="HGZ-2H-eDi" firstAttribute="leading" secondItem="aNX-H6-jEN" secondAttribute="leading" id="7l6-MN-xLU"/>
+                            <constraint firstItem="HGZ-2H-eDi" firstAttribute="bottom" secondItem="aNX-H6-jEN" secondAttribute="bottom" id="eTb-20-btz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aNX-H6-jEN"/>
                     </view>

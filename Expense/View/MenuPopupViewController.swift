@@ -10,7 +10,7 @@ import UIKit
 
 class MenuPopupViewController: UIViewController {
 
-    weak var delegate: ExpensesViewControllerDelegate?
+    weak var delegate: ExpensesViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,10 +18,14 @@ class MenuPopupViewController: UIViewController {
     }
     
     @IBAction func newExpenseButtonTouched(_ sender: UIButton) {
-            let controller : NewExpenseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
             controller.delegate = delegate
-
-            navigationController?.pushViewController(controller, animated: true)
-        }
-
+        self.dismiss(animated: false)
+        delegate?.navigationController?.pushViewController(controller, animated: true) 
+        
+    }
+    
+    @IBAction func touchedDismissButton(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

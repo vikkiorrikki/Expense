@@ -29,7 +29,7 @@ class NewExpenseViewController: UIViewController {
         }
         
         if name.isEmpty && amountText.isEmpty {
-//            // both empty
+            // both empty
             setErrorMessageForLabel(with: "Fields are empty. Please fill fields.")
             setRedBorder(textField: expenseNameTextField)
             setRedBorder(textField: expenseAmountTextField)
@@ -56,7 +56,7 @@ class NewExpenseViewController: UIViewController {
                         newExpense.amount = amount
                         newExpense.done = false
                         delegate?.addNewExpenseTouched(newExpense: newExpense)
-
+                        
                         navigationController?.popToRootViewController(animated: true)
                         
                     } else {
