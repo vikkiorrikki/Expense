@@ -25,6 +25,11 @@ class MenuPopupViewController: UIViewController {
         
     }
     
+    @IBAction func newIncomeButtonTouched(_ sender: UIButton) {
+        self.dismiss(animated: false)
+        delegate?.addNewIncomeTouched()
+    }
+    
     @IBAction func touchedDismissButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }

@@ -11,4 +11,5 @@ import CoreData
 
 protocol ExpensesViewControllerDelegate: class {
     func addNewExpenseTouched (newExpense: Expense)
+    func addNewIncomeTouched ()
 }
