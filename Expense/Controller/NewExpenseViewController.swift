@@ -54,7 +54,7 @@ class NewExpenseViewController: UIViewController {
                         let newExpense = Expense(context: context)
                         newExpense.name = name
                         newExpense.amount = amount
-                        newExpense.done = false
+                        newExpense.id = UUID()
                         delegate?.addNewExpenseTouched(newExpense: newExpense)
                         
                         navigationController?.popToRootViewController(animated: true)

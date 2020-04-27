@@ -69,11 +69,6 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         for income in incomes {
             currentSum += income.amount
         }
-        for expense in expenses {
-            if expense.done == true {
-                currentSum -= expense.amount
-            }
-        }
         currentSumLabel.text = currentSum > 0 ? "Current Sum: \(currentSum)" : "Current Sum: 0"
         return currentSum
     }
@@ -110,6 +105,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
                 if let newIncomeText = textField.text, let newIncome = Double(newIncomeText) {
                     let income = Income(context: self.context)
                     income.amount = newIncome
+                    income.id = UUID()
                     self.incomes.append(income)
                     self.saveToContext()
                     self.tableView.reloadData()
@@ -181,6 +177,7 @@ extension ExpensesViewController: UITableViewDataSource {
       if editingStyle == .delete {
         context.delete(expenses[indexPath.row])
         expenses.remove(at: indexPath.row)
+//        expenses[indexPath.row].removed = true
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
         saveToContext()
@@ -194,9 +191,27 @@ extension ExpensesViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             expenses[indexPath.row].done = !expenses[indexPath.row].done
    
+            
+            if expenses[indexPath.row].done {
+                let income = Income(context: context)
+                income.amount = -(expenses[indexPath.row].amount)
+                income.sign = false
+                income.id = expenses[indexPath.row].id
+                incomes.append(income)
+            } else {
+                var i = 0
+                while i < incomes.count {
+                    if expenses[indexPath.row].id == incomes[i].id {
+                        context.delete(incomes[i])
+                        incomes.remove(at: i)
+                    }
+                    i += 1
+                }
+            }
+            
             saveToContext()
-            self.updateNeededSum(with: self.updateTotalSum(), currentSum: self.updateCurrentSum())
-            self.tableView.deselectRow(at: indexPath, animated: true)
+            updateNeededSum(with: updateTotalSum(), currentSum: updateCurrentSum())
+            tableView.deselectRow(at: indexPath, animated: true)
         }
 }
 

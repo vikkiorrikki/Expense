@@ -2,14 +2,17 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Expense" representedClassName=".Expense" syncable="YES" codeGenerationType="class">
         <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="done" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="done" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
     </entity>
     <entity name="Income" representedClassName=".Income" syncable="YES" codeGenerationType="class">
         <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="sign" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Expense" positionX="-2470.65234375" positionY="822.875" width="128" height="88"/>
-        <element name="Income" positionX="-2733.49609375" positionY="840" width="128" height="58"/>
+        <element name="Expense" positionX="-2470.65234375" positionY="822.875" width="128" height="103"/>
+        <element name="Income" positionX="-2733.49609375" positionY="840" width="128" height="88"/>
     </elements>
 </model>
