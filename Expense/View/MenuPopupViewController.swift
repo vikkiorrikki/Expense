@@ -18,7 +18,7 @@ class MenuPopupViewController: UIViewController {
     }
     
     @IBAction func newExpenseButtonTouched(_ sender: UIButton) {
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewExpenseVC") as! NewExpenseViewController
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewGoalVC") as! NewGoalViewController
             controller.delegate = delegate
         self.dismiss(animated: false)
         delegate?.navigationController?.pushViewController(controller, animated: true) 
@@ -26,8 +26,12 @@ class MenuPopupViewController: UIViewController {
     }
     
     @IBAction func newIncomeButtonTouched(_ sender: UIButton) {
+
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewIncomeVC") as! NewIncomeViewController
+        controller.delegate = delegate
         self.dismiss(animated: false)
-        delegate?.addNewIncomeTouched()
+        delegate?.navigationController?.pushViewController(controller, animated: true)
+
     }
     
     @IBAction func touchedDismissButton(_ sender: UIButton) {

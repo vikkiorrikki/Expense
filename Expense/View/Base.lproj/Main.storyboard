@@ -162,7 +162,7 @@
         <scene sceneID="MbX-9m-OCt">
             <objects>
                 <viewController storyboardIdentifier="MenuPopupVC" modalPresentationStyle="overCurrentContext" id="TUJ-Fw-SMc" customClass="MenuPopupViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" opaque="NO" contentMode="TopLeft" ambiguous="YES" id="9cU-I4-P7F">
+                    <view key="view" opaque="NO" contentMode="TopLeft" id="9cU-I4-P7F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -173,7 +173,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="110" height="50"/>
                                         <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.89671699707994235" green="0.90588235289999997" blue="0.73602512719824731" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <state key="normal" title="New expense"/>
+                                        <state key="normal" title="New goal"/>
                                         <connections>
                                             <action selector="newExpenseButtonTouched:" destination="TUJ-Fw-SMc" eventType="touchUpInside" id="Jn1-Tm-FSs"/>
                                         </connections>
@@ -216,10 +216,10 @@
             </objects>
             <point key="canvasLocation" x="1853.6231884057972" y="117.85714285714285"/>
         </scene>
-        <!--New Expense View Controller-->
+        <!--New Goal View Controller-->
         <scene sceneID="leO-Dz-npe">
             <objects>
-                <viewController storyboardIdentifier="NewExpenseVC" id="H5u-B3-uMC" customClass="NewExpenseViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewGoalVC" id="H5u-B3-uMC" customClass="NewGoalViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7C2-cT-Jyg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -239,10 +239,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="addNewExpenseTouched:" destination="H5u-B3-uMC" eventType="touchUpInside" id="0dP-Ap-EUM"/>
+                                    <action selector="addNewGoalTouched:" destination="H5u-B3-uMC" eventType="touchUpInside" id="0dP-Ap-EUM"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New expense" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OE-4h-9dU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New goal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OE-4h-9dU">
                                 <rect key="frame" x="0.0" y="44" width="414" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <nil key="textColor"/>
@@ -303,6 +303,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R73-cb-MrK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="166.66666666666669" y="117.85714285714285"/>
+        </scene>
+        <!--New Income View Controller-->
+        <scene sceneID="JjR-ce-zIE">
+            <objects>
+                <viewController storyboardIdentifier="NewIncomeVC" id="0TQ-zS-Tzo" customClass="NewIncomeViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qip-wn-fpm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xl3-z5-yx5">
+                                <rect key="frame" x="60" y="136" width="294" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9y7-bL-9YE">
+                                <rect key="frame" x="60" y="190" width="294" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Yn-hZ-XEW">
+                                <rect key="frame" x="70" y="322" width="274" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addNewIncomeTouched:" destination="0TQ-zS-Tzo" eventType="touchUpInside" id="Wfb-Yb-EBu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New income" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrM-Ek-V9g">
+                                <rect key="frame" x="0.0" y="44" width="414" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRR-o0-42U">
+                                <rect key="frame" x="20" y="274" width="374" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.60784313729999995" green="0.10980392160000001" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Jd5-uq-oYn" firstAttribute="trailing" secondItem="qRR-o0-42U" secondAttribute="trailing" constant="20" id="25A-bQ-kMi"/>
+                            <constraint firstItem="qRR-o0-42U" firstAttribute="top" secondItem="9y7-bL-9YE" secondAttribute="bottom" constant="50" id="4wH-1m-aif"/>
+                            <constraint firstItem="xl3-z5-yx5" firstAttribute="top" secondItem="vrM-Ek-V9g" secondAttribute="bottom" constant="50" id="5iZ-gX-kc8"/>
+                            <constraint firstItem="Jd5-uq-oYn" firstAttribute="trailing" secondItem="vrM-Ek-V9g" secondAttribute="trailing" id="CY6-k5-Etb"/>
+                            <constraint firstItem="9y7-bL-9YE" firstAttribute="top" secondItem="xl3-z5-yx5" secondAttribute="bottom" constant="20" id="KQo-aY-8Js"/>
+                            <constraint firstItem="vrM-Ek-V9g" firstAttribute="top" secondItem="Jd5-uq-oYn" secondAttribute="top" id="RVd-l1-l4T"/>
+                            <constraint firstItem="vrM-Ek-V9g" firstAttribute="leading" secondItem="Jd5-uq-oYn" secondAttribute="leading" id="USR-ef-QNx"/>
+                            <constraint firstItem="Jd5-uq-oYn" firstAttribute="trailing" secondItem="xl3-z5-yx5" secondAttribute="trailing" constant="60" id="YEw-9v-PUI"/>
+                            <constraint firstItem="xl3-z5-yx5" firstAttribute="leading" secondItem="Jd5-uq-oYn" secondAttribute="leading" constant="60" id="bZR-VJ-jrt"/>
+                            <constraint firstItem="9y7-bL-9YE" firstAttribute="leading" secondItem="Jd5-uq-oYn" secondAttribute="leading" constant="60" id="dul-B2-GQQ"/>
+                            <constraint firstItem="4Yn-hZ-XEW" firstAttribute="leading" secondItem="Jd5-uq-oYn" secondAttribute="leading" constant="70" id="eb4-1M-7t2"/>
+                            <constraint firstItem="Jd5-uq-oYn" firstAttribute="trailing" secondItem="4Yn-hZ-XEW" secondAttribute="trailing" constant="70" id="jJB-J0-XhO"/>
+                            <constraint firstItem="Jd5-uq-oYn" firstAttribute="trailing" secondItem="9y7-bL-9YE" secondAttribute="trailing" constant="60" id="r1Z-T7-u9v"/>
+                            <constraint firstItem="4Yn-hZ-XEW" firstAttribute="top" secondItem="qRR-o0-42U" secondAttribute="bottom" constant="30" id="spn-V6-FcM"/>
+                            <constraint firstItem="Jd5-uq-oYn" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="4Yn-hZ-XEW" secondAttribute="bottom" constant="559" id="uEU-CC-kgK"/>
+                            <constraint firstItem="qRR-o0-42U" firstAttribute="leading" secondItem="Jd5-uq-oYn" secondAttribute="leading" constant="20" id="uxf-6R-wql"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Jd5-uq-oYn"/>
+                    </view>
+                    <connections>
+                        <outlet property="errorMessageLabel" destination="qRR-o0-42U" id="2gF-2Z-ZWM"/>
+                        <outlet property="incomeAmountTextField" destination="9y7-bL-9YE" id="EHH-Kf-eKf"/>
+                        <outlet property="incomeNameTextField" destination="xl3-z5-yx5" id="gM4-Jo-ztm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xo3-IR-IkH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3439" y="118"/>
         </scene>
     </scenes>
     <resources>

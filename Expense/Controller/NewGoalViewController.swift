@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewExpenseViewController: UIViewController {
+class NewGoalViewController: UIViewController {
 
     @IBOutlet weak var expenseNameTextField: UITextField!
     @IBOutlet weak var expenseAmountTextField: UITextField!
@@ -22,7 +22,7 @@ class NewExpenseViewController: UIViewController {
         errorMessageLabel.isHidden = true
     }
     
-    @IBAction func addNewExpenseTouched(_ sender: UIButton) {
+    @IBAction func addNewGoalTouched(_ sender: UIButton) {
         guard let name = expenseNameTextField.text, let amountText = expenseAmountTextField.text
             else {
                 return
@@ -51,11 +51,11 @@ class NewExpenseViewController: UIViewController {
             } else {
                 if let amount = Double(amountText) {
                     if amount > 0 {
-                        let newExpense = Expense(context: context)
-                        newExpense.name = name
-                        newExpense.amount = amount
-                        newExpense.id = UUID()
-                        delegate?.addNewExpenseTouched(newExpense: newExpense)
+                        let newGoal = Goal(context: context)
+                        newGoal.name = name
+                        newGoal.amount = amount
+                        newGoal.id = UUID()
+                        delegate?.addNewGoalTouched(newGoal: newGoal)
                         
                         navigationController?.popToRootViewController(animated: true)
                         

@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 protocol ExpensesViewControllerDelegate: class {
-    func addNewExpenseTouched (newExpense: Expense)
-    func addNewIncomeTouched ()
+    func addNewGoalTouched (newGoal: Goal)
+    func addNewIncomeTouched (newIncome: Record)
 }

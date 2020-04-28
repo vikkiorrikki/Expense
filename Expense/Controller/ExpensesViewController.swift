@@ -22,16 +22,16 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     // MARK: - Properties
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var incomes = [Income]() {
+    var records = [Record]() {
         didSet {
             updateNeededSum(with: updateTotalSum(), currentSum: updateCurrentSum())
         }
     }
-    var expenses = [Expense]() {
+    var goals = [Goal]() {
         didSet {
             updateNeededSum(with: updateTotalSum(), currentSum: updateCurrentSum())
 
-            if expenses.isEmpty {
+            if goals.isEmpty {
                 emptyView.isHidden = false
             } else {
                 emptyView.isHidden = true
@@ -47,17 +47,17 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        loadExpenses()
-        loadIncomes()
+        loadGoals()
+        loadRecords()
     }
     
     // MARK: - Private methods
     
     private func updateTotalSum() -> Double {
         var totalSum: Double = 0.0
-        for expense in expenses {
-            if expense.done != true {
-                totalSum += expense.amount
+        for goal in goals {
+            if goal.done != true {
+                totalSum += goal.amount
             }
         }
         totalSumLabel.text = "Total Sum: \(totalSum)"
@@ -66,8 +66,8 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
 
     private func updateCurrentSum() -> Double {
         var currentSum: Double = 0.0
-        for income in incomes {
-            currentSum += income.amount
+        for record in records {
+            currentSum += record.amount
         }
         currentSumLabel.text = currentSum > 0 ? "Current Sum: \(currentSum)" : "Current Sum: 0"
         return currentSum
@@ -89,38 +89,17 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     // MARK: - ExpensesViewControllerDelegate
     
-    func addNewExpenseTouched(newExpense: Expense) {
-        expenses.append(newExpense)
-        print("addNewExpenseTouched")
+    func addNewGoalTouched(newGoal: Goal) {
+        goals.append(newGoal)
+        print("addNewGoalTouched")
         saveToContext()
     }
-    
-    func addNewIncomeTouched(){
-        var textField = UITextField()
-            
-            let alert = UIAlertController(title: "Add new Income", message: "", preferredStyle: .alert)
-            
-            let action = UIAlertAction(title: "Add Income", style: .default) { (action) in
-                //what will happen once the user clicks the Add Doctor button on UIAlert
-                if let newIncomeText = textField.text, let newIncome = Double(newIncomeText) {
-                    let income = Income(context: self.context)
-                    income.amount = newIncome
-                    income.id = UUID()
-                    self.incomes.append(income)
-                    self.saveToContext()
-                    self.tableView.reloadData()
-                } else {
-                    //how to do when nothing happens by clicking on button
-                }
-            }
-            
-            alert.addTextField { (alertTextField) in
-                alertTextField.placeholder = "Create new Income"
-                textField = alertTextField
-            }
-            alert.addAction(action)
-            present(alert, animated: true, completion: nil)
-        }
+
+    func addNewIncomeTouched(newIncome: Record){
+        records.append(newIncome)
+        print("addNewIncomeTouched")
+        saveToContext()
+    }
     
     //MARK: - Data Manipulation Methods
     
@@ -134,24 +113,24 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         print("savedToContext")
     }
     
-    func loadExpenses(with request: NSFetchRequest<Expense> = Expense.fetchRequest()) {
+    func loadGoals(with request: NSFetchRequest<Goal> = Goal.fetchRequest()) {
         do {
-            expenses = try context.fetch(request)
+            goals = try context.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
         }
         tableView.reloadData()
-        print("loadExpenses")
+        print("loadGoals")
     }
 
-    func loadIncomes(with request: NSFetchRequest<Income> = Income.fetchRequest()) {
+    func loadRecords(with request: NSFetchRequest<Record> = Record.fetchRequest()) {
             do {
-                incomes = try context.fetch(request)
+                records = try context.fetch(request)
             } catch {
                 print("Error fetching data from context \(error)")
             }
             tableView.reloadData()
-            print("loadIncomes")
+            print("loadRecords")
         }
 }
 
@@ -160,24 +139,23 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
 extension ExpensesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return expenses.count
+        return goals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! ExpenseCell
-        cell.expenseNameLabel.text = "\(expenses[indexPath.row].name!)"
-        cell.expenseAmountLabel.text = "\(expenses[indexPath.row].amount)"
-        cell.accessoryType = expenses[indexPath.row].done ? .checkmark : .none
+        cell.expenseNameLabel.text = "\(goals[indexPath.row].name!)"
+        cell.expenseAmountLabel.text = "\(goals[indexPath.row].amount)"
+        cell.accessoryType = goals[indexPath.row].done ? .checkmark : .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
-        context.delete(expenses[indexPath.row])
-        expenses.remove(at: indexPath.row)
-//        expenses[indexPath.row].removed = true
+        context.delete(goals[indexPath.row])
+        goals.remove(at: indexPath.row)
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
         saveToContext()
@@ -189,21 +167,22 @@ extension ExpensesViewController: UITableViewDataSource {
 
 extension ExpensesViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            expenses[indexPath.row].done = !expenses[indexPath.row].done
+            goals[indexPath.row].done = !goals[indexPath.row].done
    
             
-            if expenses[indexPath.row].done {
-                let income = Income(context: context)
-                income.amount = -(expenses[indexPath.row].amount)
-                income.sign = false
-                income.id = expenses[indexPath.row].id
-                incomes.append(income)
+            if goals[indexPath.row].done {
+                let expense = Record(context: context)
+                expense.amount = -(goals[indexPath.row].amount)
+                expense.sign = false
+                expense.id = goals[indexPath.row].id
+                expense.name = goals[indexPath.row].name
+                records.append(expense)
             } else {
                 var i = 0
-                while i < incomes.count {
-                    if expenses[indexPath.row].id == incomes[i].id {
-                        context.delete(incomes[i])
-                        incomes.remove(at: i)
+                while i < records.count {
+                    if goals[indexPath.row].id == records[i].id {
+                        context.delete(records[i])
+                        records.remove(at: i)
                     }
                     i += 1
                 }
