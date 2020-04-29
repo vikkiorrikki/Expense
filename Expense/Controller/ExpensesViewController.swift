@@ -49,6 +49,18 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         loadGoals()
         loadRecords()
+        
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        nextTab()
+    }
+    func nextTab()
+    {
+        let navController = self.tabBarController?.viewControllers?[1] as! UINavigationController
+        let secondTab = navController.topViewController as! RecordsTableViewController
+        secondTab.records = records
+        secondTab.tableView.reloadData()
     }
     
     // MARK: - Private methods
@@ -169,7 +181,6 @@ extension ExpensesViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             goals[indexPath.row].done = !goals[indexPath.row].done
    
-            
             if goals[indexPath.row].done {
                 let expense = Record(context: context)
                 expense.amount = -(goals[indexPath.row].amount)

@@ -26,7 +26,6 @@ class MenuPopupViewController: UIViewController {
     }
     
     @IBAction func newIncomeButtonTouched(_ sender: UIButton) {
-
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewIncomeVC") as! NewIncomeViewController
         controller.delegate = delegate
         self.dismiss(animated: false)
