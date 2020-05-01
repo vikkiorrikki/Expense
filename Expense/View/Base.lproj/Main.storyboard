@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b7H-uX-0Za">
-                                <rect key="frame" x="0.0" y="238" width="414" height="537"/>
+                                <rect key="frame" x="0.0" y="238" width="414" height="575"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ReusableCell" rowHeight="68" id="19t-mh-k6a" customClass="ExpenseCell" customModule="Expense" customModuleProvider="target">
@@ -125,7 +125,7 @@
                             <constraint firstItem="b7H-uX-0Za" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5SX-4B-fFG"/>
                             <constraint firstItem="b7H-uX-0Za" firstAttribute="top" secondItem="jRW-IJ-mhX" secondAttribute="bottom" constant="20" id="60J-uo-ZPL"/>
                             <constraint firstItem="wcH-YS-8PV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6bj-wA-naX"/>
-                            <constraint firstItem="ccr-qT-SjQ" firstAttribute="top" secondItem="b7H-uX-0Za" secondAttribute="bottom" constant="4" id="8V5-aJ-swC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b7H-uX-0Za" secondAttribute="bottom" id="9LQ-CQ-fyM"/>
                             <constraint firstItem="wcH-YS-8PV" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="9ue-qP-n0U"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jRW-IJ-mhX" secondAttribute="trailing" constant="50" id="Kyp-EE-miL"/>
                             <constraint firstItem="b7H-uX-0Za" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LrS-Rv-DI9"/>
@@ -140,7 +140,7 @@
                             <constraint firstItem="jRW-IJ-mhX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="u2u-uY-1up"/>
                             <constraint firstItem="jRW-IJ-mhX" firstAttribute="top" secondItem="ZPn-02-MXu" secondAttribute="bottom" constant="20" id="uad-Nx-PqJ"/>
                             <constraint firstItem="ccr-qT-SjQ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="vr9-Qx-1lR"/>
-                            <constraint firstItem="ccr-qT-SjQ" firstAttribute="top" secondItem="b7H-uX-0Za" secondAttribute="bottom" constant="4" id="xpe-2B-WQd"/>
+                            <constraint firstItem="ccr-qT-SjQ" firstAttribute="top" relation="lessThanOrEqual" secondItem="jRW-IJ-mhX" secondAttribute="bottom" constant="561" id="xpe-2B-WQd"/>
                             <constraint firstItem="dJe-IA-iap" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zGI-us-u06"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

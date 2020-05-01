@@ -16,18 +16,12 @@ class RecordsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-        recordsTableView.reloadData()
-        print(records)
-    }
+
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        print(records)
         return records.count
     }
     

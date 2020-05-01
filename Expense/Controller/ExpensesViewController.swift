@@ -49,14 +49,9 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         loadGoals()
         loadRecords()
-        
-        
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
-        nextTab()
-    }
-    func nextTab()
-    {
         let navController = self.tabBarController?.viewControllers?[1] as! UINavigationController
         let secondTab = navController.topViewController as! RecordsTableViewController
         secondTab.records = records
@@ -72,6 +67,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
                 totalSum += goal.amount
             }
         }
+        totalSum = Double(round(100 * totalSum) / 100)
         totalSumLabel.text = "Total Sum: \(totalSum)"
         return totalSum
     }
@@ -81,13 +77,15 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         for record in records {
             currentSum += record.amount
         }
+        currentSum = Double(round(100 * currentSum) / 100)
         currentSumLabel.text = currentSum > 0 ? "Current Sum: \(currentSum)" : "Current Sum: 0"
         return currentSum
     }
     
     private func updateNeededSum(with totalSum: Double, currentSum: Double) {
-        let neededSum = totalSum - currentSum
-        neededSumLabel.text = neededSum > 0 ? "Needful Sum: \(neededSum)" : "Needful Sum: 0"
+        var neededSum = totalSum - currentSum
+        neededSum = Double(round(100 * neededSum) / 100)
+        neededSumLabel.text = neededSum > 0 ? "Needed Sum: \(neededSum)" : "Needed Sum: 0"
     }
 
     // MARK: - Actions
@@ -96,20 +94,17 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuPopupVC") as! MenuPopupViewController
         controller.delegate = self
         present(controller, animated: true)
-
     }
     
     // MARK: - ExpensesViewControllerDelegate
     
     func addNewGoalTouched(newGoal: Goal) {
         goals.append(newGoal)
-        print("addNewGoalTouched")
         saveToContext()
     }
 
     func addNewIncomeTouched(newIncome: Record){
         records.append(newIncome)
-        print("addNewIncomeTouched")
         saveToContext()
     }
     
@@ -179,16 +174,27 @@ extension ExpensesViewController: UITableViewDataSource {
 
 extension ExpensesViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            goals[indexPath.row].done = !goals[indexPath.row].done
-   
-            if goals[indexPath.row].done {
-                let expense = Record(context: context)
-                expense.amount = -(goals[indexPath.row].amount)
-                expense.sign = false
-                expense.id = goals[indexPath.row].id
-                expense.name = goals[indexPath.row].name
-                records.append(expense)
+            
+            if goals[indexPath.row].done == false {
+                if updateCurrentSum() >= goals[indexPath.row].amount {
+                    
+                    goals[indexPath.row].done = true
+                    
+                    let expense = Record(context: context)
+                    expense.amount = -(goals[indexPath.row].amount)
+                    expense.sign = false
+                    expense.id = goals[indexPath.row].id
+                    expense.name = goals[indexPath.row].name
+                     
+                    records.append(expense)
+                } else {
+                    let alert = UIAlertController(title: "Current Summa should be more than Goal Amount", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                }
             } else {
+                goals[indexPath.row].done = false
+                
                 var i = 0
                 while i < records.count {
                     if goals[indexPath.row].id == records[i].id {
@@ -198,7 +204,6 @@ extension ExpensesViewController: UITableViewDelegate {
                     i += 1
                 }
             }
-            
             saveToContext()
             updateNeededSum(with: updateTotalSum(), currentSum: updateCurrentSum())
             tableView.deselectRow(at: indexPath, animated: true)
