@@ -12,7 +12,11 @@ import CoreData
 class RecordsTableViewController: UITableViewController {
 
     @IBOutlet weak var recordsTableView: UITableView!
-    var records = [Record]()
+    var records = [Record]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,5 +42,4 @@ class RecordsTableViewController: UITableViewController {
         }
         return cell
     }
-
 }

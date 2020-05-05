@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hAe-VH-qx7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iPA-cV-gh1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -111,9 +111,9 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccr-qT-SjQ">
-                                <rect key="frame" x="351" y="779" width="43" height="34"/>
+                                <rect key="frame" x="360" y="779" width="34" height="34"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Add"/>
+                                <state key="normal" title="+"/>
                                 <connections>
                                     <action selector="touchMenuButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y0l-AJ-X4a"/>
                                 </connections>
@@ -134,7 +134,7 @@
                             <constraint firstItem="ZPn-02-MXu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="SWi-AD-fME"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZPn-02-MXu" secondAttribute="trailing" constant="50" id="WqI-f1-Xpl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dJe-IA-iap" secondAttribute="trailing" id="Yv9-fC-CAA"/>
-                            <constraint firstItem="ccr-qT-SjQ" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="351" id="brn-Ea-gtu"/>
+                            <constraint firstItem="ccr-qT-SjQ" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="360" id="brn-Ea-gtu"/>
                             <constraint firstItem="ZPn-02-MXu" firstAttribute="top" secondItem="wcH-YS-8PV" secondAttribute="bottom" constant="20" id="dEG-zf-1Dl"/>
                             <constraint firstItem="dJe-IA-iap" firstAttribute="top" secondItem="jRW-IJ-mhX" secondAttribute="bottom" id="lL3-1p-XLe"/>
                             <constraint firstItem="jRW-IJ-mhX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="u2u-uY-1up"/>
@@ -149,6 +149,7 @@
                     <connections>
                         <outlet property="currentSumLabel" destination="ZPn-02-MXu" id="7yA-gA-GW7"/>
                         <outlet property="emptyView" destination="dJe-IA-iap" id="kxs-7D-lKX"/>
+                        <outlet property="menuButton" destination="ccr-qT-SjQ" id="iUd-h2-udT"/>
                         <outlet property="neededSumLabel" destination="wcH-YS-8PV" id="cQS-zj-wdi"/>
                         <outlet property="tableView" destination="b7H-uX-0Za" id="U8v-5N-dpw"/>
                         <outlet property="totalSumLabel" destination="jRW-IJ-mhX" id="mL6-xZ-7It"/>
@@ -156,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1986.9565217391305" y="117.85714285714285"/>
+            <point key="canvasLocation" x="2897.1014492753625" y="117.85714285714285"/>
         </scene>
         <!--Menu Popup View Controller-->
         <scene sceneID="MbX-9m-OCt">
@@ -214,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bm-TB-4hS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2763.768115942029" y="117.85714285714285"/>
+            <point key="canvasLocation" x="3672.4637681159425" y="117.85714285714285"/>
         </scene>
         <!--New Goal View Controller-->
         <scene sceneID="leO-Dz-npe">
@@ -284,7 +285,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V1Z-b8-tTb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3576.811594202899" y="117.85714285714285"/>
+            <point key="canvasLocation" x="4486.9565217391309" y="117.85714285714285"/>
         </scene>
         <!--Goals-->
         <scene sceneID="3d7-0j-ARz">
@@ -303,7 +304,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R73-cb-MrK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076.8115942028987" y="117.85714285714285"/>
+            <point key="canvasLocation" x="1986.9565217391305" y="117.85714285714285"/>
         </scene>
         <!--New Income View Controller-->
         <scene sceneID="JjR-ce-zIE">
@@ -373,7 +374,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xo3-IR-IkH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4347.826086956522" y="117.85714285714285"/>
+            <point key="canvasLocation" x="5257.971014492754" y="117.85714285714285"/>
         </scene>
         <!--History-->
         <scene sceneID="SOr-OW-48i">
@@ -384,7 +385,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RecordCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordCell" id="hRi-hx-DDN" customClass="ExpenseCell" customModule="Expense" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RecordCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RecordCell" id="hRi-hx-DDN" customClass="ExpenseCell" customModule="Expense" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hRi-hx-DDN" id="xOr-gy-062">
@@ -430,26 +431,6 @@
             </objects>
             <point key="canvasLocation" x="2760.8695652173915" y="-556.47321428571422"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="r3Y-wf-rGr">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="hAe-VH-qx7" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Oej-0t-P6u">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="v4K-9H-yJ1" kind="relationship" relationship="viewControllers" id="Pn8-aH-kxJ"/>
-                        <segue destination="Bcx-EK-JNA" kind="relationship" relationship="viewControllers" id="hOj-ID-4Ml"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7LF-Dn-6No" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="166.66666666666669" y="117.85714285714285"/>
-        </scene>
         <!--History-->
         <scene sceneID="fK3-9z-wBf">
             <objects>
@@ -470,6 +451,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsa-J5-qyv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1850.7246376811595" y="-556.47321428571422"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="UIG-Ef-X6X">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="iPA-cV-gh1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Fh2-t3-d4u">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="v4K-9H-yJ1" kind="relationship" relationship="viewControllers" id="35r-2D-jBr"/>
+                        <segue destination="Bcx-EK-JNA" kind="relationship" relationship="viewControllers" destinationCreationSelector="historyTab" id="erz-t0-oc0"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HhJ-YM-uFe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="416" y="-197"/>
         </scene>
     </scenes>
     <resources>

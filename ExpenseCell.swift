@@ -11,4 +11,12 @@ import UIKit
 class ExpenseCell: UITableViewCell {
     @IBOutlet weak var expenseNameLabel: UILabel!
     @IBOutlet weak var expenseAmountLabel: UILabel!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        expenseNameLabel.text = nil
+        expenseAmountLabel.text = nil
+        backgroundColor = .white
+    }
 }

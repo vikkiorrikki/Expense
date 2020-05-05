@@ -18,6 +18,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     @IBOutlet weak var totalSumLabel: UILabel!
     @IBOutlet weak var currentSumLabel: UILabel!
     @IBOutlet weak var neededSumLabel: UILabel!
+    @IBOutlet weak var menuButton: UIButton!
     
     // MARK: - Properties
     
@@ -49,19 +50,16 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         loadGoals()
         loadRecords()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        let navController = self.tabBarController?.viewControllers?[1] as! UINavigationController
-        let secondTab = navController.topViewController as! RecordsTableViewController
-        secondTab.records = records
-        secondTab.tableView.reloadData()
+        passDataToHistoryTab()
+        
+        menuButton.layer.cornerRadius = 15
+        menuButton.clipsToBounds = true
     }
     
     // MARK: - Private methods
     
     private func updateTotalSum() -> Double {
-        var totalSum: Double = 0.0
+        var totalSum = 0.0
         for goal in goals {
             if goal.done != true {
                 totalSum += goal.amount
@@ -73,7 +71,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     }
 
     private func updateCurrentSum() -> Double {
-        var currentSum: Double = 0.0
+        var currentSum = 0.0
         for record in records {
             currentSum += record.amount
         }
@@ -86,6 +84,12 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         var neededSum = totalSum - currentSum
         neededSum = Double(round(100 * neededSum) / 100)
         neededSumLabel.text = neededSum > 0 ? "Needed Sum: \(neededSum)" : "Needed Sum: 0"
+    }
+    
+    private func passDataToHistoryTab() {
+        let navController = self.tabBarController?.viewControllers?[1] as! UINavigationController
+        let secondTab = navController.topViewController as! RecordsTableViewController
+        secondTab.records = records
     }
 
     // MARK: - Actions
@@ -106,6 +110,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     func addNewIncomeTouched(newIncome: Record){
         records.append(newIncome)
         saveToContext()
+        passDataToHistoryTab()
     }
     
     //MARK: - Data Manipulation Methods
@@ -121,11 +126,14 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     }
     
     func loadGoals(with request: NSFetchRequest<Goal> = Goal.fetchRequest()) {
+        let doneSortDescriptor = NSSortDescriptor(key: "done", ascending: true)
+        request.sortDescriptors = [doneSortDescriptor]
         do {
             goals = try context.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
         }
+
         tableView.reloadData()
         print("loadGoals")
     }
@@ -161,13 +169,19 @@ extension ExpensesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
-        context.delete(goals[indexPath.row])
-        goals.remove(at: indexPath.row)
-        
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        saveToContext()
+        let alert = UIAlertController(title: "Are you sure you want to remove item?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+            self.context.delete(self.goals[indexPath.row])
+            self.goals.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .left)
+            self.saveToContext()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
       }
     }
+    
 }
 
 //MARK: - TableView Delegate Methods
@@ -180,13 +194,13 @@ extension ExpensesViewController: UITableViewDelegate {
                     
                     goals[indexPath.row].done = true
                     
-                    let expense = Record(context: context)
-                    expense.amount = -(goals[indexPath.row].amount)
-                    expense.sign = false
-                    expense.id = goals[indexPath.row].id
-                    expense.name = goals[indexPath.row].name
+                    let record = Record(context: context)
+                    record.amount = -(goals[indexPath.row].amount)
+                    record.sign = false
+                    record.id = goals[indexPath.row].id
+                    record.name = goals[indexPath.row].name
                      
-                    records.append(expense)
+                    records.append(record)
                 } else {
                     let alert = UIAlertController(title: "Current Summa should be more than Goal Amount", message: nil, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -205,6 +219,8 @@ extension ExpensesViewController: UITableViewDelegate {
                 }
             }
             saveToContext()
+            loadGoals()
+            passDataToHistoryTab()
             updateNeededSum(with: updateTotalSum(), currentSum: updateCurrentSum())
             tableView.deselectRow(at: indexPath, animated: true)
         }

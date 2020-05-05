@@ -23,26 +23,12 @@ class NewIncomeViewController: UIViewController {
     }
     
     @IBAction func addNewIncomeTouched(_ sender: UIButton) {
-        guard let name = incomeNameTextField.text, let amountText = incomeAmountTextField.text
+        guard let amountText = incomeAmountTextField.text
             else {
                 return
         }
         
-        if name.isEmpty && amountText.isEmpty {
-            // both empty
-            setErrorMessageForLabel(with: "Fields are empty. Please fill fields.")
-            setRedBorder(textField: incomeNameTextField)
-            setRedBorder(textField: incomeAmountTextField)
-
-        } else {
-            if name.isEmpty {
-                // error for name
-                errorMessageLabel.text =  "Name is empty. Please fill field."
-                setErrorMessageForLabel(with: "Name is empty. Please fill field.")
-                setRedBorder(textField: incomeNameTextField)
-                setNotBorder(textField: incomeAmountTextField)
-                
-            } else if amountText.isEmpty {
+        if amountText.isEmpty {
                 // error for amount
                 setErrorMessageForLabel(with: "Amount is empty. Please fill field.")
                 setRedBorder(textField: incomeAmountTextField)
@@ -52,7 +38,13 @@ class NewIncomeViewController: UIViewController {
                 if let amount = Double(amountText) {
                     if amount > 0 {
                         let newIncome = Record(context: context)
-                        newIncome.name = name
+                        
+                        if incomeNameTextField.text == "" {
+                            newIncome.name = "Unnamed income"
+                        } else {
+                            newIncome.name = incomeNameTextField.text
+                        }
+                        
                         newIncome.amount = amount
                         newIncome.id = UUID()
                         delegate?.addNewIncomeTouched(newIncome: newIncome)
@@ -72,7 +64,6 @@ class NewIncomeViewController: UIViewController {
             }
         }
         
-    }
     func setRedBorder(textField: UITextField) {
         textField.layer.borderColor = #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1)
         textField.layer.borderWidth = 1.0
