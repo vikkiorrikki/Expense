@@ -23,6 +23,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     // MARK: - Properties
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let storageService = CoreDataStorageService()
     var records = [Record]() {
         didSet {
             updateNeededSum(with: updateTotalSum(), currentSum: updateCurrentSum())
@@ -48,8 +49,8 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        loadGoals()
-        loadRecords()
+        goals = storageService.loadGoals(goals: goals, tableView: tableView)
+        records = storageService.loadRecords(records: records, tableView: tableView)
         passDataToHistoryTab()
         
         menuButton.layer.cornerRadius = 15
@@ -104,49 +105,15 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     
     func addNewGoalTouched(newGoal: Goal) {
         goals.append(newGoal)
-        saveToContext()
+        storageService.saveToContext(tableView: tableView)
     }
 
     func addNewIncomeTouched(newIncome: Record){
         records.append(newIncome)
-        saveToContext()
+        storageService.saveToContext(tableView: tableView)
         passDataToHistoryTab()
     }
     
-    //MARK: - Data Manipulation Methods
-    
-    func saveToContext() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving context \(error)")
-        }
-        tableView.reloadData()
-        print("savedToContext")
-    }
-    
-    func loadGoals(with request: NSFetchRequest<Goal> = Goal.fetchRequest()) {
-        let doneSortDescriptor = NSSortDescriptor(key: "done", ascending: true)
-        request.sortDescriptors = [doneSortDescriptor]
-        do {
-            goals = try context.fetch(request)
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
-
-        tableView.reloadData()
-        print("loadGoals")
-    }
-
-    func loadRecords(with request: NSFetchRequest<Record> = Record.fetchRequest()) {
-            do {
-                records = try context.fetch(request)
-            } catch {
-                print("Error fetching data from context \(error)")
-            }
-            tableView.reloadData()
-            print("loadRecords")
-        }
 }
 
 //MARK: - UITableViewDataSource
@@ -175,7 +142,7 @@ extension ExpensesViewController: UITableViewDataSource {
             self.goals.remove(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .left)
-            self.saveToContext()
+            self.storageService.saveToContext(tableView: tableView)
         }))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         self.present(alert, animated: true)
@@ -218,8 +185,8 @@ extension ExpensesViewController: UITableViewDelegate {
                     i += 1
                 }
             }
-            saveToContext()
-            loadGoals()
+            storageService.saveToContext(tableView: tableView)
+            goals = storageService.loadGoals(goals: goals, tableView: tableView)
             passDataToHistoryTab()
             updateNeededSum(with: updateTotalSum(), currentSum: updateCurrentSum())
             tableView.deselectRow(at: indexPath, animated: true)

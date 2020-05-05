@@ -13,6 +13,7 @@
 		F519D614241EC3D3009B9A3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F519D612241EC3D3009B9A3B /* Main.storyboard */; };
 		F519D616241EC3D6009B9A3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F519D615241EC3D6009B9A3B /* Assets.xcassets */; };
 		F519D619241EC3D6009B9A3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F519D617241EC3D6009B9A3B /* LaunchScreen.storyboard */; };
+		F533156E24619387003322CC /* CoreDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F533156D24619387003322CC /* CoreDataStorageService.swift */; };
 		F568D82A243E8A9F0033CADD /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F568D829243E8A9F0033CADD /* ExpenseCell.swift */; };
 		F568D82D243E8D540033CADD /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F568D82B243E8D540033CADD /* DataModel.xcdatamodeld */; };
 		F58A9FEC245863B7005D3B90 /* RecordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A9FEB245863B7005D3B90 /* RecordsTableViewController.swift */; };
@@ -31,6 +32,7 @@
 		F519D615241EC3D6009B9A3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F519D618241EC3D6009B9A3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F519D61A241EC3D6009B9A3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F533156D24619387003322CC /* CoreDataStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageService.swift; sourceTree = "<group>"; };
 		F568D829243E8A9F0033CADD /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = SOURCE_ROOT; };
 		F568D82C243E8D540033CADD /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F58A9FEB245863B7005D3B90 /* RecordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecordsTableViewController.swift; path = Expense/View/RecordsTableViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -108,6 +110,7 @@
 				F59837AD2422C7800016AD69 /* NewGoalViewController.swift */,
 				F59FC1D224583D46009A53B2 /* NewIncomeViewController.swift */,
 				F59837B624263A1A0016AD69 /* ExpensesViewControllerDelegate.swift */,
+				F533156D24619387003322CC /* CoreDataStorageService.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				F59FC1D324583D46009A53B2 /* NewIncomeViewController.swift in Sources */,
 				F568D82A243E8A9F0033CADD /* ExpenseCell.swift in Sources */,
 				F568D82D243E8D540033CADD /* DataModel.xcdatamodeld in Sources */,
+				F533156E24619387003322CC /* CoreDataStorageService.swift in Sources */,
 				F59837AE2422C7800016AD69 /* NewGoalViewController.swift in Sources */,
 				F58A9FEC245863B7005D3B90 /* RecordsTableViewController.swift in Sources */,
 				F519D60F241EC3D3009B9A3B /* SceneDelegate.swift in Sources */,
