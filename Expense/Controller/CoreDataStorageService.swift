@@ -19,7 +19,7 @@ class CoreDataStorageService {
             print("Error saving context \(error)")
         }
         tableView.reloadData()
-        print("savedToContext")
+//        print("savedToContext")
     }
     
     func loadGoals(with request: NSFetchRequest<Goal> = Goal.fetchRequest(), goals: [Goal], tableView: UITableView) -> [Goal] {
@@ -33,7 +33,7 @@ class CoreDataStorageService {
         }
 
         tableView.reloadData()
-        print("loadGoals")
+//        print("loadGoals")
         
         return loadedGoals
     }
@@ -46,7 +46,7 @@ class CoreDataStorageService {
             print("Error fetching data from context \(error)")
         }
         tableView.reloadData()
-        print("loadRecords")
+//        print("loadRecords")
         
         return loadedRecords
     }

@@ -15,8 +15,7 @@ class ExpenseCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        expenseNameLabel.text = nil
-        expenseAmountLabel.text = nil
+        expenseAmountLabel.textColor = nil
         backgroundColor = .white
     }
 }

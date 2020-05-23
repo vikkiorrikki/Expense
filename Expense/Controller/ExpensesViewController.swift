@@ -53,7 +53,11 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         records = storageService.loadRecords(records: records, tableView: tableView)
         passDataToHistoryTab()
         
-        menuButton.layer.cornerRadius = 15
+        let plusImage = UIImage(systemName: "plus")
+        let tintedImage = plusImage?.withRenderingMode(.alwaysTemplate)
+        menuButton.setImage(tintedImage, for: .normal)
+        menuButton.tintColor = .white
+        menuButton.layer.cornerRadius = 25
         menuButton.clipsToBounds = true
     }
     
@@ -66,8 +70,8 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
                 totalSum += goal.amount
             }
         }
-        totalSum = Double(round(100 * totalSum) / 100)
-        totalSumLabel.text = "Total Sum: \(totalSum)"
+        let roundedTotalSum = roundValue(totalSum)
+        totalSumLabel.text = "\(roundedTotalSum) ₽"
         return totalSum
     }
 
@@ -76,15 +80,19 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
         for record in records {
             currentSum += record.amount
         }
-        currentSum = Double(round(100 * currentSum) / 100)
-        currentSumLabel.text = currentSum > 0 ? "Current Sum: \(currentSum)" : "Current Sum: 0"
+        let roundedCurrentSum = roundValue(currentSum)
+        currentSumLabel.text = currentSum > 0 ? "\(roundedCurrentSum) ₽" : "0"
         return currentSum
     }
     
     private func updateNeededSum(with totalSum: Double, currentSum: Double) {
-        var neededSum = totalSum - currentSum
-        neededSum = Double(round(100 * neededSum) / 100)
-        neededSumLabel.text = neededSum > 0 ? "Needed Sum: \(neededSum)" : "Needed Sum: 0"
+        let neededSum = totalSum - currentSum
+        let roundedNeededSum = roundValue(neededSum)
+        neededSumLabel.text = neededSum > 0 ? "\(roundedNeededSum) ₽" : "0"
+    }
+    
+    func roundValue(_ value: Double) -> String {
+        return String(format: "%.0f", value)
     }
     
     private func passDataToHistoryTab() {
@@ -96,9 +104,44 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     // MARK: - Actions
     
     @IBAction func touchMenuButton(_ sender: UIButton) {
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuPopupVC") as! MenuPopupViewController
-        controller.delegate = self
-        present(controller, animated: true)
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        
+//        2
+        let newGoalAction = UIAlertAction(title: "New goal", style: .default, handler: { (UIAlertAction) in
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewGoalVC") as! NewGoalViewController
+                controller.delegate = self
+            self.dismiss(animated: false)
+            self.navigationController?.pushViewController(controller, animated: true)
+        })
+        
+        
+        let newIncomeAction = UIAlertAction(title: "New income", style: .default, handler: { (UIAlertAction) in
+               let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewIncomeVC") as! NewIncomeViewController
+               controller.delegate = self
+               self.dismiss(animated: false)
+            self.navigationController?.pushViewController(controller, animated: true)
+        })
+            
+        // 3
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            
+        // 4
+        optionMenu.addAction(newGoalAction)
+        optionMenu.addAction(newIncomeAction)
+        optionMenu.addAction(cancelAction)
+            
+        // 5
+        self.present(optionMenu, animated: true, completion: nil)
+        
+        
+        
+        
+        
+        
+        
+//        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuPopupVC") as! MenuPopupViewController
+//        controller.delegate = self
+//        present(controller, animated: true)
     }
     
     // MARK: - ExpensesViewControllerDelegate
@@ -106,6 +149,7 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
     func addNewGoalTouched(newGoal: Goal) {
         goals.append(newGoal)
         storageService.saveToContext(tableView: tableView)
+        goals = storageService.loadGoals(goals: goals, tableView: tableView)
     }
 
     func addNewIncomeTouched(newIncome: Record){
@@ -119,17 +163,25 @@ class ExpensesViewController: UIViewController, ExpensesViewControllerDelegate {
 //MARK: - UITableViewDataSource
 
 extension ExpensesViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return goals.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return goals.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! ExpenseCell
-        cell.expenseNameLabel.text = "\(goals[indexPath.row].name!)"
-        cell.expenseAmountLabel.text = "\(goals[indexPath.row].amount)"
-        cell.accessoryType = goals[indexPath.row].done ? .checkmark : .none
+        cell.expenseNameLabel.text = "\(goals[indexPath.section].name!)"
+        
+        let roundedAmount = roundValue(goals[indexPath.section].amount)
+        cell.expenseAmountLabel.text = "\(roundedAmount) ₽"
+        
+        cell.accessoryType = goals[indexPath.section].done ? .checkmark : .none
         
         return cell
     }
@@ -138,10 +190,12 @@ extension ExpensesViewController: UITableViewDataSource {
       if editingStyle == .delete {
         let alert = UIAlertController(title: "Are you sure you want to remove item?", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            self.context.delete(self.goals[indexPath.row])
-            self.goals.remove(at: indexPath.row)
+            self.context.delete(self.goals[indexPath.section])
+            self.goals.remove(at: indexPath.section)
+            let indexSet = IndexSet(arrayLiteral: indexPath.section)
+            tableView.deleteSections(indexSet, with: .automatic)
             
-            tableView.deleteRows(at: [indexPath], with: .left)
+//            tableView.deleteRows(at: [indexPath], with: .left)
             self.storageService.saveToContext(tableView: tableView)
         }))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
@@ -156,16 +210,16 @@ extension ExpensesViewController: UITableViewDataSource {
 extension ExpensesViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
-            if goals[indexPath.row].done == false {
-                if updateCurrentSum() >= goals[indexPath.row].amount {
+            if goals[indexPath.section].done == false {
+                if updateCurrentSum() >= goals[indexPath.section].amount {
                     
-                    goals[indexPath.row].done = true
+                    goals[indexPath.section].done = true
                     
                     let record = Record(context: context)
-                    record.amount = -(goals[indexPath.row].amount)
+                    record.amount = -(goals[indexPath.section].amount)
                     record.sign = false
-                    record.id = goals[indexPath.row].id
-                    record.name = goals[indexPath.row].name
+                    record.id = goals[indexPath.section].id
+                    record.name = goals[indexPath.section].name
                      
                     records.append(record)
                 } else {
@@ -174,11 +228,11 @@ extension ExpensesViewController: UITableViewDelegate {
                     self.present(alert, animated: true)
                 }
             } else {
-                goals[indexPath.row].done = false
+                goals[indexPath.section].done = false
                 
                 var i = 0
                 while i < records.count {
-                    if goals[indexPath.row].id == records[i].id {
+                    if goals[indexPath.section].id == records[i].id {
                         context.delete(records[i])
                         records.remove(at: i)
                     }
