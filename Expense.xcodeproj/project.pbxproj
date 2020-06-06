@@ -13,13 +13,13 @@
 		F519D614241EC3D3009B9A3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F519D612241EC3D3009B9A3B /* Main.storyboard */; };
 		F519D616241EC3D6009B9A3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F519D615241EC3D6009B9A3B /* Assets.xcassets */; };
 		F519D619241EC3D6009B9A3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F519D617241EC3D6009B9A3B /* LaunchScreen.storyboard */; };
+		F533156E24619387003322CC /* CoreDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F533156D24619387003322CC /* CoreDataStorageService.swift */; };
 		F568D82A243E8A9F0033CADD /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F568D829243E8A9F0033CADD /* ExpenseCell.swift */; };
 		F568D82D243E8D540033CADD /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F568D82B243E8D540033CADD /* DataModel.xcdatamodeld */; };
 		F58A9FEC245863B7005D3B90 /* RecordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A9FEB245863B7005D3B90 /* RecordsTableViewController.swift */; };
 		F59837AE2422C7800016AD69 /* NewGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59837AD2422C7800016AD69 /* NewGoalViewController.swift */; };
 		F59837B724263A1A0016AD69 /* ExpensesViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59837B624263A1A0016AD69 /* ExpensesViewControllerDelegate.swift */; };
 		F59FC1D324583D46009A53B2 /* NewIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59FC1D224583D46009A53B2 /* NewIncomeViewController.swift */; };
-		F5F1D0FD24426EEE00E2ABFF /* MenuPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F1D0FC24426EEE00E2ABFF /* MenuPopupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,13 +31,13 @@
 		F519D615241EC3D6009B9A3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F519D618241EC3D6009B9A3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F519D61A241EC3D6009B9A3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F533156D24619387003322CC /* CoreDataStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageService.swift; sourceTree = "<group>"; };
 		F568D829243E8A9F0033CADD /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = SOURCE_ROOT; };
 		F568D82C243E8D540033CADD /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F58A9FEB245863B7005D3B90 /* RecordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecordsTableViewController.swift; path = Expense/View/RecordsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F59837AD2422C7800016AD69 /* NewGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalViewController.swift; sourceTree = "<group>"; };
 		F59837B624263A1A0016AD69 /* ExpensesViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewControllerDelegate.swift; sourceTree = "<group>"; };
 		F59FC1D224583D46009A53B2 /* NewIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIncomeViewController.swift; sourceTree = SOURCE_ROOT; };
-		F5F1D0FC24426EEE00E2ABFF /* MenuPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuPopupViewController.swift; path = Expense/View/MenuPopupViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,10 +104,10 @@
 			children = (
 				F519D610241EC3D3009B9A3B /* ExpensesViewController.swift */,
 				F58A9FEB245863B7005D3B90 /* RecordsTableViewController.swift */,
-				F5F1D0FC24426EEE00E2ABFF /* MenuPopupViewController.swift */,
 				F59837AD2422C7800016AD69 /* NewGoalViewController.swift */,
 				F59FC1D224583D46009A53B2 /* NewIncomeViewController.swift */,
 				F59837B624263A1A0016AD69 /* ExpensesViewControllerDelegate.swift */,
+				F533156D24619387003322CC /* CoreDataStorageService.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -183,13 +183,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5F1D0FD24426EEE00E2ABFF /* MenuPopupViewController.swift in Sources */,
 				F59837B724263A1A0016AD69 /* ExpensesViewControllerDelegate.swift in Sources */,
 				F519D611241EC3D3009B9A3B /* ExpensesViewController.swift in Sources */,
 				F519D60D241EC3D3009B9A3B /* AppDelegate.swift in Sources */,
 				F59FC1D324583D46009A53B2 /* NewIncomeViewController.swift in Sources */,
 				F568D82A243E8A9F0033CADD /* ExpenseCell.swift in Sources */,
 				F568D82D243E8D540033CADD /* DataModel.xcdatamodeld in Sources */,
+				F533156E24619387003322CC /* CoreDataStorageService.swift in Sources */,
 				F59837AE2422C7800016AD69 /* NewGoalViewController.swift in Sources */,
 				F58A9FEC245863B7005D3B90 /* RecordsTableViewController.swift in Sources */,
 				F519D60F241EC3D3009B9A3B /* SceneDelegate.swift in Sources */,
@@ -346,7 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com-viktoriia-s.Expense";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -364,7 +364,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com-viktoriia-s.Expense";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

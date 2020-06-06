@@ -75,7 +75,7 @@ class NewGoalViewController: UIViewController {
     }
     
     func setRedBorder(textField: UITextField) {
-        textField.layer.borderColor = #colorLiteral(red: 0.6643349528, green: 0, blue: 0.08385483176, alpha: 1)
+        textField.layer.borderColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1)
         textField.layer.borderWidth = 1.0
     }
     func setNotBorder(textField: UITextField) {
